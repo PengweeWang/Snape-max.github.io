@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pixiv Cat</title>
+  <link rel="stylesheet" href="../../blogstyle.css"> <!-- 添加链接到外部 CSS 文件 -->
+  <link rel="icon" type="image/png" href="../../ico.png">
+		<!--背景渐变效果样式代码开始（可忽略）-->
+<style type="text/css">
+			html,body{width:100%;height:100%;margin:0;padding:0;}
+			body{
+			background: -webkit-linear-gradient(left,rgba(89,114,192,0.8),rgba(89,114,192,0.6));
+			background: -o-linear-gradient(right,rgba(89,114,192,0.8),rgba(89,114,192,0.6));
+			background: -moz-linear-gradient(right,rgba(89,114,192,0.8),rgba(89,114,192,0.6));
+			background: linear-gradient(to right, rgba(89,114,192,0.8), rgba(89,114,192,0.6));
+			background-size: 400% 400%;
+			animation: gradientBG 5s ease infinite;}
+			@keyframes gradientBG {
+			0% {
+			background-position: 0% 50%;
+			}
+			50% {
+			background-position: 100% 50%;
+			}
+			100% {
+			background-position: 0% 50%;
+			}
+			}
+            #blog-list {
+    background-color: rgba(89,114,192,0.0);
+    padding: 40px 0;
+    text-align: center;
+}
+</style>
+<!--背景渐变效果样式代码结束（可忽略）-->
+
+<!--定义底部承载游动小鱼特效的div样式开始-->
+<style type="text/css">
+    .container{
+    margin:0;
+    padding:0;
+    background-color:transparent;
+    width:100%;
+    height:200px;
+    z-index:-1;
+    position:fixed;
+    bottom:0;
+    left:0;}
+</style>
+<!--定义底部承载游动小鱼特效的div样式结束-->
+
+<style type="text/css">
+    header {
+        background-color: rgba(89, 115, 192, 0);
+        color: rgb(0, 0, 0);
+        text-align: center;
+        padding: 10px; /* Increase the top and bottom padding for more spacing */
+    }
+    header h1 {
+        font-family: "Comic Sans MS", cursive, sans-serif; /* 使用草书字体 */
+        font-size: 36px; /* Adjust the font size as needed */
+    }
+    #id-input{
+        width: 100%; /* 调整搜索框的宽度 */
+        height: 100%; /* 调整搜索框的高度 */
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-family: "Comic Sans MS", cursive, sans-serif;  
+        text-align: center;
+    }
+    .input-box{
+        position: relative;
+        width: 20%;
+        top: 2%;
+        bottom: 0;
+        left: 0%;
+        right: 0;
+        margin: auto;
+    }
+    .main{
+        background-color: #ffffff00;
+        border-radius: 20px;
+        width: 80%;
+        height: 60%;
+        margin: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    img{
+        height: 100%;
+        object-fit: scale-down;
+        margin: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    #pic{
+    border-radius: 20px; /* Make the image round */
+    border: 1px solid #ffffff84; /* Add a white border around the image */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    }
+        /* 侧边栏 */
+    .sidebar a {
+    user-select: none;
+    font-family: "Comic Sans MS", cursive, sans-serif; 
+    font-size: 100px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    position: absolute; 
+    left: -80px; /* 将它们放在屏幕之外 */
+    transition: 0.3s; /* 在悬停时添加过渡 */
+    padding: 15px; /* 15px 内边距 */
+    width: 100px; /* 设置特定宽度 */
+    text-decoration: none; /* 删除下划线 */
+    font-size: 20px; /* 增加字体大小 */
+    color: rgba(255, 255, 255, 0); /* 白色文本颜色 */
+    border-radius: 0 5px 5px 0; /* 右上角和右下角的圆角 */
+    z-index: 1;
+    text-align: left;
+    }
+
+
+    .sidebar a:hover {
+    text-align: center;
+    left: 0; 
+    color: white;
+    }
+
+    #return {
+    top:40px;
+    background-color: #4c6aaf;
+    }
+</style>
+</head>
+<body>
+    <div class="sidebar">
+        <a id="return" href="../../tools.html" class="choice">Return</a>
+    </div>
+    <header>
+        <h1 align="center">Pixiv Illustration Cat</h1>
+    </header>
+
+    <div class="input-box">
+        <input type="text" id="id-input" placeholder="Search Illustartion By ID ..." onkeydown="search(event);">
+    </div>
+
+
+    <div class="main">
+        <img src="https://pixiv.re/113516712.png" id="pic">
+    </div>
+    
+
+    <script>
+        function search(e){
+            var evt = window.event || e;
+            if (evt.keyCode == 13){
+                var id = document.getElementById("id-input").value;
+                var picurl="https://pixiv.re/" + id + ".png";
+                $.ajax({
+                    type: 'HEAD',
+                    url: picurl,
+                    complete: function(xhr,data){
+                        var retype = xhr.getResponseHeader('Content-Type');
+                        if(retype==null){
+                            window.open("./404.html")
+                        }else{
+                            if (retype.indexOf("image") != -1){
+                                window.open("./pic.html?id="+id);
+                            } else{
+                                window.open("./404.html")
+                            }
+                        }
+                    }
+                });
+
+
+
+                
+                
+            }
+        }
+    </script>
+
+
+
+
+    <script src="../../jquery.min.js"></script>
+    <div id="jsi-flying-fish-container" class="container"></div>
+    <script src='../../fish.js'></script>
+</body>
+</html>

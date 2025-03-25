@@ -1,0 +1,241 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart.js</title>
+    <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+    <div class="sidebar">
+        <a id="return" href="../../tools.html" class="choice">Return</a>
+    </div>
+
+    <div class="main">
+        <div id="content-1" class="content">
+            <div class="choose">
+                <select name="type" id="type">
+                    <option value="bar">柱状图</option>
+                    <option value="bubble">气泡图</option>
+                    <option value="doughnut">环形图</option>
+                    <option value="pie">饼状图</option>
+                    <option value="line">折线图</option>
+                    <option value="polarArea">极面积图</option>
+                    <option value="radar">雷达图</option>
+                    <option value="scatter">散点图</option>
+                </select>
+                <label class="p1">显示图例</label>
+                <div class="open">
+                    <label class="switch">
+                        <input type="checkbox"id="mySwitch" onclick="plot()">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <button id="plot" onclick="show(2)&plot()">Plot</button>
+            </div>
+            <div id="data-1" class="data">
+                <br>
+                <br>
+                <li>
+                    <textarea id="labels" cols="30" rows="10" placeholder="输入labels信息: 使用空格分隔" class="data-content">red blue pink white orange</textarea>
+                </li>
+                <li>
+                    <textarea id="values" cols="30" rows="10" placeholder="输入values轴信息：每组数据用逗号分隔；组间数据用空格分隔，每组第一个数据为数据集的名称" class="data-content">Liking 5 2 3 4 6</textarea>
+                </li>
+            </div>
+        </div>
+
+        <div id="content-2" class="content">
+            <div id="content-2header">
+                <button id="download" onclick="exportCanvasAsPNG('chart','fig')"><svg t="1703210418689" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2334" width="18" height="18"><path d="M341.333333 640a42.666667 42.666667 0 0 1-42.666666 42.666667H256a170.666667 170.666667 0 0 1-40.277333-336.554667 298.709333 298.709333 0 0 1 570.154666-81.408A213.333333 213.333333 0 0 1 725.333333 682.666667a42.666667 42.666667 0 0 1 0.042667-85.333334 128 128 0 0 0 36.394667-250.794666l-38.144-11.264-15.914667-36.437334a213.376 213.376 0 0 0-407.296 58.026667l-7.381333 58.368-57.173334 13.824A85.418667 85.418667 0 0 0 256 597.333333h42.666667a42.666667 42.666667 0 0 1 42.666666 42.666667z m321.706667 87.338667a42.666667 42.666667 0 0 1 0 60.330666l-120.917333 120.832c-16.682667 16.64-43.690667 16.64-60.373334 0l-120.917333-120.832a42.666667 42.666667 0 0 1 60.330667-60.330666L469.333333 775.509333V426.666667a42.666667 42.666667 0 0 1 85.333334 0v348.714666l48.042666-48.042666a42.666667 42.666667 0 0 1 60.330667 0z" fill="#333333" p-id="2335"></path></svg></button>
+                <button id="closem" onclick="closemap()"><svg t="1702965566872" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4266" width="10" height="10"><path d="M86.016 0l-83.968 70.656c149.504 111.616 288.768 239.616 411.136 367.616-187.392 188.928-334.336 374.784-411.648 449.536l159.744 133.632c56.832-117.248 180.224-294.912 345.6-481.28 165.376 187.392 289.28 366.08 346.112 483.84 0 0 155.648-165.376 169.472-139.776C962.56 816.64 816.128 620.032 619.52 418.816c112.64-115.712 239.104-230.4 374.272-331.264l-36.864-68.608c-153.088 76.288-299.008 189.44-430.08 309.76-132.096-125.44-281.6-244.736-440.832-328.704z" p-id="4267"></path></svg></button>
+            </div>
+            <canvas id="chart"></canvas>
+        </div>
+    </div>
+</body>
+
+
+
+
+<script>
+    var content  = document.getElementById("content-2")
+    function show(i){
+        if (i == 1){
+            content.style.display  = "none";
+        } else{
+            content.style.display  = "block";
+        }
+    }
+
+    function closemap(){
+        content.style.display  = "none";
+    }
+
+</script>
+
+<script>
+    dragElement(document.getElementById("content-2"));
+
+    function dragElement(elmnt) {
+    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    if (document.getElementById(elmnt.id + "header")) {
+        // 如果存在，标题是您从中移动 DIV 的位置:
+        document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+    } else {
+        // 否则，从 DIV 内的任何位置移动 DIV:
+        elmnt.onmousedown = dragMouseDown;
+    }
+
+    function dragMouseDown(e) {
+        e.preventDefault();
+        // 在启动时获取鼠标光标位置:
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        // 每当光标移动时调用一个函数:
+        document.onmousemove = elementDrag;
+    }
+
+    function elementDrag(e) {
+        e.preventDefault();
+        // 计算新的光标位置:
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        // 设置元素的新位置:
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    }
+
+    function closeDragElement() {
+        // 释放鼠标按钮时停止移动:
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+    }
+</script>
+<script src="./chart.js"></script>
+<script>
+        function randomrgba(){
+            var r = Math.floor(Math.random() * 256);
+            var g = Math.floor(Math.random() * 256);
+            var b = Math.floor(Math.random() * 256);
+            return "rgba(" + r + "," + g + "," + b + ",";
+        }
+
+        function removedou(str){
+            var reg=/,$/gi;
+            return str.replace(reg,"");
+        }
+        Chart.defaults.font.size = 16;
+        Chart.defaults.font.family = "'Courier New', Courier, monospace";
+        function plot(){
+            var islegend = document.getElementById("mySwitch");
+            Chart.defaults.plugins.legend.display = islegend.checked;
+            var t = {"bar":1,"bubble":2,"doughnut":3,"pie":4,"line":5,"polarArea":6,"rader":7,"scatter":8};
+            var container = document.getElementById("content-2");
+            var ctx = document.getElementById("chart");
+            ctx.remove()
+            const newctx = document.createElement('canvas');
+            newctx.id = "chart";
+            container.appendChild(newctx);
+            var ctx = document.getElementById("chart");
+
+            var selection = document.getElementById("type");
+            var index = selection.selectedIndex;
+            var type = selection.options[index].value
+
+
+
+            var labels_str = document.getElementById("labels").value;
+            var data_str = document.getElementById("values").value;
+            var values_set = removedou(data_str.trim()).split(',');
+            var labels = removedou(labels_str.trim()).split(/,|，|\s+/);
+
+
+
+            let num = values_set.length;
+
+            // 随机颜色
+            let backgroundColor = new Array(labels.length);
+            let borderColor = new Array(labels.length);
+
+            for(let s = 0;s<labels.length;s++){
+                rancolor = randomrgba() 
+                backgroundColor[s] = rancolor + 0.5 + ")";
+                borderColor[s] = rancolor + 1 + ")";
+            }
+
+
+
+            let datasets = new Array(num);
+
+            for (let m = 0;m<num;m++){
+                let temp = values_set[m].trim().split(/\s+/);
+                var datasets_value = temp.slice(1).map(Number);
+                var datasets_name = temp[0];
+
+                datasets[m] = {
+                    label:datasets_name,
+                    data:datasets_value,
+                    backgroundColor: backgroundColor,
+                    borderWidth: 1,
+                }
+            }
+
+
+            const data = {
+                labels: labels,
+                datasets: datasets
+            };
+
+            // 设置背景色
+            const plugin = {
+                id: 'customCanvasBackgroundColor',
+                beforeDraw: (chart, args, options) => {
+                    const {ctx} = chart;
+                    ctx.save();
+                    ctx.globalCompositeOperation = 'destination-over';
+                    ctx.fillStyle = options.color || '#ffffff';
+                    ctx.fillRect(0, 0, chart.width, chart.height);
+                    ctx.restore();
+                }
+            };
+
+            const config = {
+            type: type,
+            data: data,
+            options: {
+                scales: {
+
+                    }
+                },
+                plugins: {
+                        customCanvasBackgroundColor: {
+                        color: 'white',
+                    }   
+                },
+                plugins: [plugin],
+            };
+            mychart = new Chart(ctx, config);
+        }
+</script>
+
+<script>
+    function exportCanvasAsPNG(id, fileName) {
+        var canvasElement = document.getElementById(id);
+        var MIME_TYPE = "image/png";
+        var imgURL = canvasElement.toDataURL(MIME_TYPE);
+        var dlLink = document.createElement('a');
+        dlLink.download = fileName;
+        dlLink.href = imgURL;
+        dlLink.dataset.downloadurl = [MIME_TYPE, dlLink.download, dlLink.href].join(':');
+        document.body.appendChild(dlLink);
+        dlLink.click();
+        document.body.removeChild(dlLink);
+    }
+</script>
+
+</html>

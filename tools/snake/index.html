@@ -1,0 +1,82 @@
+<title>贪吃龙</title>
+
+<style>
+    button{
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        border-width: 6px;
+    }
+    .key{
+        width: 200px;
+        height: 100px;
+        display: flex;
+        text-align: center;
+        font-size: 50px;
+    }
+    #w{
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        position: absolute;
+        display: flex;
+    }
+    #a{
+        top: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        position: absolute;
+        display: flex;
+    }
+    #s{
+        bottom: 0;
+        right: 0;
+        left: 0;
+        margin: auto;
+        position: absolute;
+        display: flex;
+    }
+
+    #d{
+        bottom: 0;
+        right: 0;
+        top: 0;
+        margin: auto;
+        position: absolute;
+        display: flex;
+    }
+    #space{
+        bottom: 0;
+        right: 0;
+        top: 0;
+        left: 0;
+        margin: auto;
+        position: absolute;
+        display: flex;
+    }
+    body {
+        background: #355c7d;
+    }
+</style>
+<canvas id="canvas"></canvas>
+<canvas id="snake"></canvas>
+
+<div id="panel" style="display: none;">
+    
+</div>
+
+<div id="control" style="display: none;">
+<button class="key" id="w" onclick="javascript:document.dispatchEvent(new KeyboardEvent('keydown', {'keyCode':87,'which':87}));">W</button>
+<button class="key" id="a" onclick="javascript:document.dispatchEvent(new KeyboardEvent('keydown', {'keyCode':65,'which':65}));">A</button>
+<button class="key" id="s" onclick="javascript:document.dispatchEvent(new KeyboardEvent('keydown', {'keyCode':83,'which':83}));">S</button>
+<button class="key" id="d" onclick="javascript:document.dispatchEvent(new KeyboardEvent('keydown', {'keyCode':68,'which':68}));">D</button>
+<button class="key" id="space" onclick="javascript:document.dispatchEvent(new KeyboardEvent('keydown', {'keyCode':32,'which':32}));">SPACE</button>
+<button class="key" id="i" onclick="javascript:document.dispatchEvent(new KeyboardEvent('keydown', {'keyCode':73,'which':73}));">A🤖I</button>
+</div>
+
+<script src="./game.js" charset="UTF-8" type="module">
+</script>

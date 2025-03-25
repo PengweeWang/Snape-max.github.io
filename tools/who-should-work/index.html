@@ -1,0 +1,116 @@
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 视口设置 -->
+<title>Who should clean up?</title>
+<div id="app">
+    <h1>今天该谁打扫卫生？</h1>
+    <div id="worker_1">
+        🧐
+    </div>
+    <h1>明天是</h1>
+    <div id="worker_2">
+        🫡
+    </div>
+</div>
+
+<style>
+    /* 基础样式 */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9; /* 淡蓝色背景 */
+    color: #333333; /* 文字颜色 */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#app {
+    text-align: center;
+    background: white;
+    padding: 0 5em;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 1.5em;
+    margin: 0.5em 0;
+    color: #2c3e50;
+}
+
+#worker_1, #worker_2 {
+    font-size: 3em;
+    margin: 1em 0;
+    display: inline-block;
+    padding: 0.5em 0.8em;
+    background: #e57f99; /* 浅紫色背景 */
+    color: white;
+    border-radius: 3dvh;
+    transition: transform 0.3s ease;
+}
+
+#worker_1 {
+    font-size: 5em;
+}
+
+#worker_1:hover, #worker_2:hover {
+    transform: scale(1.5); /* 鼠标悬停时放大图标 */
+    background: #e25e7f;
+}
+
+@media (max-width: 768px) { /* 当屏幕宽度小于等于768px时应用这些样式 */
+    body {
+        height: auto; /* 移动端高度自适应 */
+    }
+
+    #app {
+        width: 80%; /* 宽度占父容器的90% */
+        padding: 1rem; /* 减少内边距 */
+    }
+
+    h1 {
+        font-size: 1.2em; /* 减小标题字体大小 */
+    }
+
+    #worker_1, #worker_2 {
+        font-size: 2em; /* 减小图标的字体大小 */
+    }
+    #worker_1 {
+        font-size: 3em; /* 减小图标的字体大小 */
+    }
+}
+</style>
+
+<script>
+    var people_list = ["🎃", "🌪", "🍬", "😄"];
+    function daysBetweenTodayAnd(dateString) {
+        // 将输入的日期字符串转换为Date对象
+        const givenDate = new Date(dateString);
+        // 获取今天的日期
+        const today = new Date();
+        // 计算两个日期之间的时间差（以毫秒为单位）
+        const timeDifference = today - givenDate;
+        // 一天的毫秒数
+        const oneDayInMs = 1000 * 60 * 60 * 24;
+        // 计算相差的天数
+        const daysDifference = Math.floor(timeDifference / oneDayInMs);
+        return daysDifference;
+    }
+
+    function main(){
+        const firstDate = new Date("2024-10-10");
+        var days = daysBetweenTodayAnd(firstDate);
+        today_worker = people_list[days % people_list.length];
+        tomor_worker = people_list[(days + 1) % people_list.length];
+        console.log("Today " + people_list[days % people_list.length] + " should clean up.");
+        console.log("Tomorrow " + people_list[(days + 1) % people_list.length] + " should clean up.")
+        document.getElementById("worker_1").innerHTML = today_worker;
+        document.getElementById("worker_2").innerHTML = tomor_worker;
+
+    }
+
+    main()
+</script>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .main{
+        background-color: rgba(183, 183, 183, 0.321);
+        border-radius: 10px;
+        border-color: rgb(202, 201, 201);
+        border-width: 2px;
+        height: 60%;
+        width: 50%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+    }
+    .title{
+      position: relative;
+      height: 30%;
+    }
+    .title h1{
+      text-align: center;
+      font-family: "Comic Sans MS", cursive, sans-serif;  
+      color: aliceblue;
+    }
+    .user-name{
+      position: relative;
+      height: 20%;
+      text-align:center;
+
+    }
+    .user-pswd{
+      height: 20%;
+      text-align:center;
+
+    }
+    #submit{
+      height: 30%;
+      text-align:center;
+
+    }
+    #name{
+      top: 10%;
+      width: 30%; /* 调整搜索框的宽度 */
+      height: 20%; /* 调整搜索框的高度 */
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-family: "Comic Sans MS", cursive, sans-serif;  
+      text-align: center;
+    }
+    #pswd{
+      top: 0;
+      width: 30%; /* 调整搜索框的宽度 */
+      height: 20%; /* 调整搜索框的高度 */
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-family: "Comic Sans MS", cursive, sans-serif;  
+      text-align: center;
+    }
+    #but{
+      width: 30%; /* 调整搜索框的宽度 */
+      height: 30%; /* 调整搜索框的高度 */
+      padding: 8px;
+      background-color: #151515;
+      border: 1px solid #151515;
+      border-radius: 5px;
+      font-family: "Comic Sans MS", cursive, sans-serif;  
+      text-align: center;
+      color: aliceblue;
+    }
+    #submit button:hover{
+      color: #151515;
+      background-color: #686868;
+      border: 1px solid #686868;
+      border-radius: 5px;
+    }
+</style>
+</head>
+
+<body>
+  <canvas></canvas>
+  <div class="main">
+    <div class="title">
+      <h1>Library Login Page</h1>
+    </div>
+      <div class="user-name">
+        <input type="text" id="name" placeholder="Email/User name">
+      </div>
+      <div class="user-pswd">
+        <input type="password" id="pswd" placeholder="Password">
+      </div>
+      <div id="submit">
+        <button id="but">Login</button>
+      </div>
+  </div>
+  <script src='js/zrveeq.js'></script>
+  <script  src="js/index.js"></script>
+</body>
+
+</html>

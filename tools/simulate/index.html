@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=0.5">
+    <title>电磁波在媒质间反射和折射仿真</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <div class="sidebar">
+      <a id="return" href="../../tools.html" class="choice">Return</a>
+    </div>
+    <div id="control">
+      <center>
+        <p>介质1参数</p>
+      </center>
+
+        <div>
+            <center><label>μ<sub>1</sub> = μ<sub>0</sub></label></center>
+            <center><label>ε<sub>1</sub> = ε<sub>0</sub></label></center>
+        </div>
+        <center>
+          <p>介质2参数</p>
+        </center>
+        <div>
+            <center>
+              <label >μ<sub>r2</sub>=</label>
+              <input type="text" id="mu2">
+            </center>
+
+        </div>
+
+        <div>
+          <center>
+            <label >ε<sub>r2</sub>=</label>
+            <input type="text"  id="epsilon2">
+          </center>
+
+        </div>
+
+        <p style="font-size: 18px;">
+          说明:
+        </p>
+        <p>点击介质1区域开始模拟</p>
+        <p>黑色表示入射波</p>
+        <p style="color: red;">红色表示反射波</p>
+        <p style="color: blue;">蓝色表示折射波</p>
+        <p>颜色深浅表示波强度大小, 以入射波为垂直极化波为例.</p>
+    </div>
+    <div id="information">
+      <center>
+        <p id="thetai">入射角: </p>
+        <p id="thetar">反射角: </p>
+        <p id="thetat">折射角: </p>
+        <p id="ga1">Γ <sub>⊥</sub>: </p>
+        <p id="tao1">τ <sub>⊥</sub>: </p>
+        <p id="ga2">Γ <sub>//</sub>: </p>
+        <p id="tao2">τ <sub>//</sub>: </p>
+      </center>
+    </div>
+    <canvas id="buttom" width="800" height="600"></canvas>
+    <canvas id="tutorial" width="800" height="600"></canvas>
+    
+    <script src="scripts.js"></script>
+    <script>
+      (function () {
+        function resize() {
+          var body = document.getElementsByTagName('body')[0];
+          var html = document.getElementsByTagName('html')[0];
+          var width = html.clientWidth;
+          var height =  html.clientHeight;
+          var max = width > height ? width : height;
+          var min = width > height ? height : width;
+          body.style.width = max + "px";
+          body.style.height = min + "px";
+
+        }
+          resize();
+          window.addEventListener("resize", resize)
+      })();
+    </script>
+  </body>
+</html>

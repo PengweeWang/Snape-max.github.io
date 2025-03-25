@@ -1,0 +1,119 @@
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: -webkit-linear-gradient(left,rgba(89,114,192,0.8),rgba(89,114,192,0.6));
+    background: -o-linear-gradient(right,rgba(89,114,192,0.8),rgba(89,114,192,0.6));
+    background: -moz-linear-gradient(right,rgba(89,114,192,0.8),rgba(89,114,192,0.6));
+    background: linear-gradient(to right, rgba(89,114,192,0.8), rgba(89,114,192,0.6));
+    background-size: 400% 400%;
+    animation: gradientBG 5s ease infinite;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    overscroll-behavior: contain;
+    }
+    @keyframes gradientBG {
+    0% {
+    background-position: 0% 50%;
+    }
+    50% {
+    background-position: 100% 50%;
+    }
+    100% {
+    background-position: 0% 50%;
+    }
+}
+
+/* 样式页面内容 */
+.main{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  border-color: rgba(0, 0, 0, 0.63);
+  border-width: 3px;
+  margin: auto;
+  background: rgba(0, 0, 0, .1);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  z-index: 0;
+}
+
+/* 侧边栏 */
+.sidebar a {
+  user-select: none;
+  font-family: "Comic Sans MS", cursive, sans-serif; 
+  font-size: 100px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: color 0.3s ease;
+  position: absolute; 
+  left: -80px; /* 将它们放在屏幕之外 */
+  transition: 0.3s; /* 在悬停时添加过渡 */
+  padding: 15px; /* 15px 内边距 */
+  width: 100px; /* 设置特定宽度 */
+  text-decoration: none; /* 删除下划线 */
+  font-size: 20px; /* 增加字体大小 */
+  color: rgba(255, 255, 255, 0); /* 白色文本颜色 */
+  border-radius: 0 5px 5px 0; /* 右上角和右下角的圆角 */
+  z-index: 1;
+  text-align: left;
+}
+
+
+.sidebar a:hover {
+  text-align: center;
+  left: 0; 
+  color: white;
+
+}
+
+#return {
+  top:40px;
+  background-color: #1f3361;
+}
+
+#game{
+    position: relative;
+    margin: auto;
+    background-color: rgba(250, 235, 215, 0.733);
+}
+
+#answer{
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: rgba(250, 235, 215, 0.733);
+    transition: color 0.3s ease;
+    transition: 0.3s; /* 在悬停时添加过渡 */
+    height: 500px;
+    width: 500px;
+    z-index: 9;
+    border: 2px solid #fff;
+    display: none;
+}
+
+#settings{
+    position: absolute;
+    top:40px;
+    margin: auto;
+}
+
+#settings button{
+    height: 40px;
+    width: 60px;
+    border-radius: 5px;
+    margin: 5px;
+    background-color: #4066c0;
+    color: white;
+    border-color: rgba(0, 0, 0, 0.63);
+    border-width: 3px;
+}

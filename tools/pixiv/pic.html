@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Illustartion Cat</title>
+  <link rel="icon" type="image/png" href="../../ico.png">
+</head>
+<style type="text/css">
+    html,body{width:100%;height:100%;margin:0;padding:0;}
+    body{
+    background: -webkit-linear-gradient(left,rgba(89,114,192,0.8),rgba(89,114,192,0.6));
+    background: -o-linear-gradient(right,rgba(89,114,192,0.8),rgba(89,114,192,0.6));
+    background: -moz-linear-gradient(right,rgba(89,114,192,0.8),rgba(89,114,192,0.6));
+    background: linear-gradient(to right, rgba(89,114,192,0.8), rgba(89,114,192,0.6));
+    background-size: 400% 400%;
+    animation: gradientBG 5s ease infinite;}
+    @keyframes gradientBG {
+    0% {
+    background-position: 0% 50%;
+    }
+    50% {
+    background-position: 100% 50%;
+    }
+    100% {
+    background-position: 0% 50%;
+    }
+    }
+</style>
+
+<style>
+    .main{
+        background-color: #ffffff00;
+        border-radius: 20px;
+        width: 80%;
+        height: 80%;
+        margin: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    img{
+        height: 100%;
+        object-fit: scale-down;
+        margin: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    #pic{
+    border-radius: 20px; /* Make the image round */
+    border: 1px solid #ffffff84; /* Add a white border around the image */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    }
+</style>
+
+<body>
+    <div class="main">
+        <img src="" id="pic">
+    </div>
+</body>
+
+<script>
+    // 获取URL中的查询字符串
+    var queryString = window.location.search;
+    // 解析查询字符串为参数和值的键值对
+    var params = new URLSearchParams(queryString);
+    // 获取特定参数的值
+    var id = params.get("id");
+    document.getElementById("pic").setAttribute("src","https://pixiv.re/"+id+".png")
+</script>
+
+
+
+</html>

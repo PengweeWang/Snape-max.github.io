@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>塔罗牌占卜</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a0f1f linear-gradient(45deg, #2d1b36 0%, #1a0f1f 100%);
+            color: #f0e6f5;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            font-size: 16px;
+            padding: 10px;
+        }
+    
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+    
+        h2, h3 {
+            color: #e8d8ff;
+            text-shadow: 0 0 10px rgba(232, 216, 255, 0.3);
+            margin-bottom: 1.5em;
+        }
+    
+        .input-section {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+        }
+    
+        #query {
+            width: 80%;
+            padding: 12px 20px;
+            margin: 15px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #635276;
+            border-radius: 25px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+    
+        #query:focus {
+            outline: none;
+            border-color: #9d7dbf;
+            box-shadow: 0 0 15px #9d7dbf;
+        }
+    
+        button {
+            background: #6a4c93;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    
+        button:hover {
+            background: #8b6db0;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(106, 76, 147, 0.4);
+        }
+    
+
+        #cardSelection {
+            text-align: center;
+            margin-top: 2rem;
+        }
+    
+
+        .card {
+            perspective: 800px; 
+            width: 120px;
+            height: 200px;
+            margin: 0 auto;
+            position: relative; 
+        }
+
+
+        .card-inner {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            transform-origin: center center; 
+        }
+
+
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+
+        .card:hover {
+            z-index: 2 !important;
+        }
+
+        .card.flipped {
+            z-index: 1;
+        }
+
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transform-style: preserve-3d;
+        }
+
+        .card-back {
+            background: #4a306d;
+            transform: rotateY(0deg);
+            display: flex;
+            border: 2px solid #7b5c9e;
+        }
+
+        .card-front {
+            background: #f0e6f5;
+            transform: rotateY(180deg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-front.reversed {
+            transform: rotateY(180deg) rotate(180deg); 
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 25px; 
+            padding: 20px;
+            perspective: 1000px; 
+        }
+    
+
+        .selection-status {
+            color: #b39ddb;
+            font-size: 1.1em;
+            margin: 20px 0;
+            padding: 10px;
+            background: rgba(179, 157, 219, 0.1);
+            border-radius: 8px;
+        }
+    
+
+        #result {
+            visibility: hidden;
+            margin-top: 2rem;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+
+            white-space: pre-wrap;
+            border: 1px solid #4a306d;
+            transition: all 0.3s ease;
+        }
+    
+    
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+    
+        #result[data-loading="true"]::before {
+            content: "🔮";
+            animation: pulse 1.5s infinite;
+            font-size: 2em;
+            display: block;
+            text-align: center;
+        }
+        
+        #result::after {
+            content: '▌';
+            animation: blink 1s step-end infinite;
+            color: #666;
+        }
+        
+        @keyframes blink {
+            50% { opacity: 0 }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="input-section" id="inputSection">
+            <h2>今日运势塔罗占卜</h2>
+            <input type="text" id="query" placeholder="请输入想占卜的方面（如健康、工作、学习...）">
+            <button onclick="startDivination()">开始占卜</button>
+        </div>
+
+        <div id="cardSelection" style="display: none;">
+            <h3>请依次选择三张塔罗牌：</h3>
+            <div class="selection-status" id="selectionStatus">正在选择能量牌（1/3）</div>
+            <div class="cards-container" id="cardsContainer"></div>
+            <button id="interpretBtn" onclick="interpretCards()" disabled>开始解牌</button>
+        </div>
+
+        <div id="result"></div>
+        <br>
+        <br>
+        <br>
+    </div>
+<script src="./marked.min.js"></script>
+<script>
+    // 卡片
+    const card_name = ['愚人', '魔术师', '女祭祀', '女皇', '皇帝', '教皇', '恋人',
+                '战车', '力量', '隐士', '命运之轮', '正义', '倒吊人', '死神',
+                '节制', '魔鬼', '高塔', '星星', '月亮', '太阳', '审判', '世界'];
+                
+    const tarotCards = card_name.map((name, id) => ({ id, name }));
+
+    // API
+    function checkAPIKey() {
+        if (!localStorage.getItem('apikey')) {
+            const key = prompt('请输入您的DeepSeek API密钥：');
+            if (key) localStorage.setItem('apikey', key);
+            else alert('需要API密钥才能使用服务！');
+        }
+    }
+    checkAPIKey();
+
+    let selectedCards = [];
+
+    function startDivination() {
+        document.getElementById('inputSection').style.display = 'none';
+        document.getElementById('cardSelection').style.display = 'block';
+        initCards();
+        updateSelectionStatus();
+    }
+
+    function updateSelectionStatus() {
+        const phases = ['能量牌', '建议牌', '警示牌'];
+        const currentStep = selectedCards.length;
+        if (currentStep >= 3) {
+            document.getElementById('selectionStatus').style.display = 'none';
+            return;
+        }
+        document.getElementById('selectionStatus').innerHTML = 
+            `正在选择${phases[currentStep]}（${currentStep + 1}/3）`;
+    }
+
+    function initCards() {
+        const container = document.getElementById('cardsContainer');
+        container.innerHTML = '';
+        // 打乱tarotCards
+        shuffledtarotCards = tarotCards.sort(() => Math.random() - 0.5);
+        shuffledtarotCards.forEach(card => {
+            const cardDiv = document.createElement('div');
+            cardDiv.className = 'card';
+            cardDiv.innerHTML = `
+                <div class="card-inner">
+                    <img src="assets/cover.jpg" class="card-back">
+                    <img src="assets/${card.id}.gif" class="card-front">
+                </div>
+            `;
+            
+            cardDiv.onclick = () => {
+                if (selectedCards.length >= 3 || cardDiv.classList.contains('flipped')) return;
+                
+                const isReversed = Math.random() < 0.5;
+                cardDiv.classList.add('flipped');
+                if (isReversed) {
+                    cardDiv.querySelector('.card-front').classList.add('reversed');
+                }
+                
+                selectedCards.push({
+                    ...card,
+                    reversed: isReversed,
+                    role: ['能量', '建议', '警示'][selectedCards.length] // 根据当前数量自动分配角色
+                });
+                
+                updateSelectionStatus();
+                document.getElementById('interpretBtn').disabled = selectedCards.length !== 3;
+            };
+            container.appendChild(cardDiv);
+        });
+    }
+
+    // 提示词生成函数
+    function getCurrentTimeDescription() {
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+
+        let period;
+        if (hours >= 0 && hours < 6) period = "凌晨";
+        else if (hours < 12) period = "上午";
+        else if (hours < 18) period = "下午";
+        else period = "晚上";
+
+        return `${period}${hours % 12 || 12}点${minutes}分`;
+    }
+
+    function get_prompt(aspect, cards) {
+        return `你是一名专注于塔罗每日指引的占卜师，擅长将大阿尔卡那的象征意义转化为日常生活建议。  
+    请根据用户提供的今日抽牌信息，为用户进行解读：  
+
+    **1. 用户抽牌**：  
+    - 抽牌数量：3张(能量/建议/警示)
+    - 牌面信息：
+    1. 能量牌：${cards[0].name}${cards[0].reversed ? "逆位" : "正位"}  
+    2. 建议牌：${cards[1].name}${cards[1].reversed ? "逆位" : "正位"}  
+    3. 警示牌：${cards[2].name}${cards[2].reversed ? "逆位" : "正位"}  
+    - 附加需求：需要聚焦特定领域（${aspect}）  
+
+    **2. 你的解读任务**：  
+    ① 今日气运（核心能量分析）
+    - 用一句话总结今日整体基调（如“突破日”“疗愈日”“谨慎日”）  
+    - 结合牌面符号与正逆位，进行详细分析 
+
+    ② 细分领域指引 （可以根据内容更改这部分标题）
+    - 能量/现状：今日主导能量如何影响生活  
+    - 建议/机会：具体行动或心态调整  
+    - 警示/挑战：需规避的风险或心态  
+
+    ③ 今日行动清单（根据当前时间：${getCurrentTimeDescription()} 给出合理建议）
+    - 给出1-3条可立即执行的建议，用“✅”和“❌”区分鼓励与避免事项。`;
+    }
+
+    async function interpretCards() {
+        let btn = document.getElementById('interpretBtn');
+        btn.disabled = true;
+        let resultDiv = document.getElementById('result');
+        resultDiv.style.visibility = 'visible';
+        if (!localStorage.getItem('apikey')) return checkAPIKey();
+        
+        const aspect = document.getElementById('query').value || '综合运势';
+        const prompt = get_prompt(aspect, selectedCards);
+        //console.log(prompt);
+        resultDiv.innerHTML = '🔮 正在解读中...';
+
+        try {
+            const response = await fetch('https://api.deepseek.com/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('apikey')}`
+                },
+                body: JSON.stringify({
+                    model: "deepseek-chat",
+                    messages: [{ role: "user", content: prompt }],
+                    stream: true  // 启用流式传输
+                })
+            });
+
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder();
+            let resultText = '';
+
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                const chunk = decoder.decode(value, { stream: true });
+                
+                // 处理流式数据块
+                chunk.split('\n').forEach(line => {
+                    if (line.startsWith('data: ') && !line.includes('[DONE]')) {
+                        try {
+                            const data = JSON.parse(line.slice(6));
+                            const content = data.choices[0]?.delta?.content || '';
+                            resultText += content;
+                            // 实时更新显示内容
+                            resultDiv.innerHTML = marked.parse(resultText + '▌');  // 添加光标效果
+                        } catch (e) {
+                            console.error('解析错误:', e);
+                        }
+                    }
+                });
+            }
+            
+            // 最终解析完整结果
+            resultDiv.innerHTML = marked.parse(resultText);
+        } catch (error) {
+            resultDiv.innerHTML = '⚠️ 解牌失败，请检查网络连接或API密钥';
+            console.error('Error:', error);
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,1482 @@
+<html class=" znouuqqtsg idc0_347"><link rel="stylesheet" href="./files/all.css">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head>
+
+<title>扫雷</title>
+
+<script src="./files/gfs.js"></script>
+<script src="./files/ns6.04.js"></script>
+<style>
+
+html,body{width:100%;height:100%;margin:0;padding:0;}
+			body{
+			background: -webkit-linear-gradient(left,rgba(89,114,192,0.8),rgba(89,114,192,0.6));
+			background: -o-linear-gradient(right,rgba(89,114,192,0.8),rgba(89,114,192,0.6));
+			background: -moz-linear-gradient(right,rgba(89,114,192,0.8),rgba(89,114,192,0.6));
+			background: linear-gradient(to right, rgba(89,114,192,0.8), rgba(89,114,192,0.6));
+			background-size: 400% 400%;
+			animation: gradientBG 5s ease infinite;}
+			@keyframes gradientBG {
+			0% {
+			background-position: 0% 50%;
+			}
+			50% {
+			background-position: 100% 50%;
+			}
+			100% {
+			background-position: 0% 50%;
+			}
+			}
+
+input{height:1.5rem;width:3.8rem;}
+
+#face{
+	border:2px solid #808080;
+	border-left-color: #fff;
+	border-top-color: #fff;
+
+}
+#face:active{
+	border:2px solid #808080;
+	border-bottom:1px solid #808080; 
+	border-right:1px solid #808080; 
+
+}
+
+
+
+table{
+border-collapse:collapse;
+}
+
+.pad{
+border:2px solid #808080;
+border-right-color: #fff;
+border-bottom-color: #fff;
+}
+
+input[type=checkbox]{vertical-align:middle;height:1.19rem;width:1.5rem;}
+
+.container{
+			margin:0;
+			padding:0;
+			background-color:transparent;
+			width:100%;
+			height:200px;
+			z-index:-1;
+			position:fixed;
+			bottom:0;
+			left:0;}
+</style>
+<!--<base target="_top">--><base href="." target="_top">
+
+<style id="lh0ah7qa.n6d">
+                 #search-jumper {
+                     font-size: 16px;
+                 }
+                 #search-jumper.search-jumper-showall {
+                     overflow-y: hidden;
+                     pointer-events: all;
+                     overscroll-behavior: contain;
+                     -ms-scroll-chaining: contain;
+                     flex-direction: unset;
+                     max-width: unset;
+                     max-height: unset;
+                     text-align: center;
+                     top: 0;
+                     bottom: unset;
+                     height: 100%;
+                 }
+                 #search-jumper.search-jumper-showall>.search-jumper-searchBar {
+                     display: none;
+                 }
+                 #search-jumper.search-jumper-showall #filterSites {
+                     background-color: #2a282cc0;
+                     border: none;
+                     height: 40px;
+                     margin-bottom: 0;
+                     padding: 5px;
+                     margin: 0 10px;
+                     box-shadow: #ddd 0px 0px 3px;
+                     outline: none;
+                     box-sizing: border-box;
+                     cursor: default;
+                     user-select: none;
+                     -webkit-user-select: none;
+                     -moz-user-select: none;
+                     -khtml-user-select: none;
+                     -ms-user-select: none;
+                     position: fixed;
+                     width: 80%;
+                     left: calc(10% - 10px);
+                     top: 1%;
+                     border-radius: 20px;
+                     pointer-events: all;
+                 }
+                 #search-jumper.search-jumper-showall #filterSites>input,
+                 #search-jumper.search-jumper-showall #filterSites>textarea {
+                     background-color: #000000;
+                     color: white;
+                     border: none;
+                     outline: none;
+                     box-sizing: border-box;
+                     font-size: 20px;
+                     cursor: text;
+                 }
+                 #search-jumper.search-jumper-showall #filterSites>span {
+                     display: none;
+                 }
+                 #search-jumper.search-jumper-showall #search-jumper-alllist .sitelist {
+                     visibility: visible!important;
+                     opacity: 1;
+                     pointer-events: all;
+                     text-align: left;
+                     position: static;
+                     display: block!important;
+                     height: fit-content;
+                     max-height: calc(100vh - 120px);
+                     overscroll-behavior: contain;
+                     -ms-scroll-chaining: contain;
+                 }
+                 #search-jumper.search-jumper-showall #search-jumper-alllist .sitelist>.sitelistCon {
+                     opacity: 1;
+                 }
+                 #search-jumper.search-jumper-showall #search-jumper-alllist .sitelist>.sitelistCon>p {
+                     pointer-events: all;
+                     cursor: pointer;
+                 }
+                 #search-jumper.search-jumper-showall #search-jumper-alllist .sitelist>.sitelistCon a {
+                     display: flex!important;
+                 }
+                 #search-jumper.search-jumper-showall #search-jumper-alllist .sitelist:hover {
+                     z-index: 1;
+                 }
+                 #search-jumper.search-jumper-showall.search-jumper-searchBarCon {
+                     -ms-overflow-style: unset;
+                     scrollbar-width: unset;
+                     overflow: hidden;
+                 }
+                 #search-jumper-alllist {
+                     display: none;
+                     top: 101px;
+                     position: absolute;
+                     width: 100%;
+                     overflow-x: scroll;
+                     overflow-y: hidden;
+                     height: calc(100% - 101px);
+                     overscroll-behavior: contain;
+                     -ms-scroll-chaining: contain;
+                 }
+                 #search-jumper-alllist>.search-jumper-btn {
+                     position: fixed;
+                     top: 1%;
+                     right: 10%;
+                     filter: drop-shadow(1px 1px 3px #00000060);
+                     cursor: pointer;
+                     pointer-events: all;
+                     z-index: 1;
+                 }
+                 #search-jumper-alllist>.search-jumper-btn>svg {
+                     cursor: pointer;
+                 }
+                 .search-jumper-showallBg {
+                     display: none;
+                     position: fixed;
+                     left: 0;
+                     top: 0;
+                     width: 100%;
+                     height: 100%;
+                     z-index: -1;
+                     transform: translateZ(0);
+                     background-color: rgba(0, 0, 0, 0.1);transition:background-color .6s ease;
+                 }
+                 #search-jumper.search-jumper-showall:hover>.search-jumper-showallBg,
+                 body:hover+#search-jumper.search-jumper-showall>.search-jumper-showallBg {
+                     background-color: rgba(0, 0, 0, 0.8);
+                 }
+                 #search-jumper.search-jumper-showall>.search-jumper-showallBg {
+                     display: block;
+                 }
+                 .search-jumper-historylist {
+                     display: flex;
+                     position: fixed;
+                     width: 100%;
+                     max-width: 100%;
+                     overflow: auto;
+                     justify-content: center;
+                     left: 0;
+                     top: 60px;
+                     background: #f5f5f5e0;
+                     border-bottom: 1px solid #ddd;
+                     pointer-events: all;
+                     min-height: 40px;
+                 }
+                 #search-jumper.search-jumper-showall #search-jumper-alllist {
+                     display: block;
+                 }
+                 #search-jumper-alllist>.sitelistBox {
+                     display: flex;
+                     min-width: 100%;
+                     justify-content: center;
+                     width: fit-content;
+                     min-height: 100%;
+                     position: initial;
+                 }
+                 #search-jumper-alllist>.timeInAll,
+                 #search-jumper-alllist>.dayInAll {
+                     position: fixed;
+                     top: 0;
+                     width: 10%;
+                     font-size: 1.5vw;
+                     line-height: 1;
+                     color: white;
+                     height: 60px;
+                     display: flex;
+                     justify-content: center;
+                     align-items: center;
+                     opacity: 0.6;
+                     font-weight: bold;
+                     font-family: Arial,sans-serif;
+                     overflow-wrap: anywhere;
+                     pointer-events: none;
+                 }
+                 #search-jumper-alllist>.dayInAll {
+                     left: 0;
+                 }
+                 #search-jumper-alllist>.timeInAll {
+                     right: 0;
+                 }
+                 .search-jumper-searchBarCon {
+                     all: unset;
+                     position: fixed;
+                     top: 0;
+                     left: 0;
+                     width: 100%;
+                     z-index: 2147483646;
+                     pointer-events: none;
+                     text-align: center;
+                     overflow: scroll;
+                     display: block;
+                     -ms-overflow-style: none;
+                     scrollbar-width: none;
+                     box-sizing: border-box;
+                     z-index: 2147483647;
+                     user-select: none;
+                 }
+                 .search-jumper-searchBar {
+                     z-index: 2147483647;
+                     overflow-wrap: break-word;
+                     background: #505050;
+                     border-radius: 18.900000000000002px!important;
+                     border: 1px solid #b3b3b3;
+                     display: inline-flex;
+                     pointer-events: all;
+                     margin-top: -22.5px;
+                     vertical-align: top;
+                     opacity: 0.3;
+                     transition:margin-top 1s ease, margin-left 1s, right 1s, opacity 1s, transform 1s;
+                     user-select: none;
+                     text-align: center;
+                     position: relative;
+                     box-sizing: border-box;
+                 }
+                 .hideAll>.search-jumper-searchBar {
+                     margin-top: -36px;
+                 }
+                 .search-jumper-searchBarCon:not(.search-jumper-showall)::-webkit-scrollbar {
+                     width: 0 !important;
+                     height: 0 !important;
+                 }
+                 .search-jumper-searchBarCon.search-jumper-scroll {
+                     pointer-events: all;
+                     overscroll-behavior: contain;
+                     -ms-scroll-chaining: contain;
+                 }
+                 .search-jumper-scroll.search-jumper-bottom {
+                     overflow-y: hidden;
+                 }
+                 .search-jumper-scroll>.search-jumper-searchBar {
+                     position: static !important;
+                 }
+                 .search-jumper-scroll.search-jumper-right>.search-jumper-searchBar {
+                     position: absolute !important;
+                     top: 0;
+                 }
+                 .search-jumper-scroll.search-jumper-bottom>.search-jumper-searchBar {
+                     margin-top: 0px;
+                 }
+                 .search-jumper-scroll.search-jumper-bottom>.search-jumper-searchBar:hover,
+                 .search-jumper-scroll.search-jumper-bottom>.search-jumper-searchBar.initShow,
+                 .resizePage.search-jumper-scroll.search-jumper-bottom>.search-jumper-searchBar,
+                 .search-jumper-scroll.search-jumper-bottom.funcKeyCall>.search-jumper-searchBar,
+                 #search-jumper.in-input.search-jumper-scroll.search-jumper-bottom>.search-jumper-searchBar {
+                     margin-top: 0px;
+                 }
+                 .search-jumper-searchBar:hover {
+                     margin-top: 0;
+                     opacity: 1;
+                     transition:margin-top 0.1s ease, margin-left 0.1s, right 0.1s, opacity 0.1s, transform 0.1s;
+                 }
+                 .search-jumper-searchBar.initShow,
+                 .resizePage>.search-jumper-searchBar {
+                     margin-top: 0;
+                     opacity: 0.8;
+                     transition:margin-top 0.25s ease, margin-left 0.25s, right 0.25s, opacity 0.25s, transform 0.25s;
+                 }
+                 .funcKeyCall>.search-jumper-searchBar.initShow {
+                     transition:opacity 0.5s ease-out;
+                 }
+                 #search-jumper.funcKeyCall {
+                     overflow: visible;
+                     position: absolute;
+                     max-width: 100%;
+                     top: 0;
+                 }
+                 .funcKeyCall>.search-jumper-searchBar {
+                     position: absolute!important;
+                     background: none;
+                     border: none;
+                     max-width: unset!important;
+                     margin: unset;
+                     
+                     
+                 }
+                 .funcKeyCall>.search-jumper-searchBar:hover {
+                     
+                 }
+                 .in-input>.search-jumper-searchBar,
+                 .funcKeyCall>.search-jumper-searchBar {
+                     opacity: 1;
+                     display: inline-flex!important;
+                 }
+                 .funcKeyCall>.search-jumper-searchBar {
+                     flex-direction: column;
+                 }
+                 #search-jumper.funcKeyCall>.search-jumper-searchBar>.search-jumper-type {
+                     height: auto!important;
+                     width: 252px!important;
+                     max-width: unset;
+                     max-height: 107.2px;
+                     flex-wrap: wrap!important;
+                     flex-direction: row;
+                     padding: 5px;
+                     box-shadow: #000000 0px 0px 10px;
+                     overflow: auto;
+                     scrollbar-width: none;
+                     overscroll-behavior: contain;
+                     -ms-scroll-chaining: contain;
+                     transition: none;
+                     background: #d0d0d0d0;
+                     box-sizing: content-box;
+                 }
+                 #search-jumper.funcKeyCall>.search-jumper-searchBar>.search-jumper-type>.sitelist {
+                     display: none;
+                 }
+                 
+                 
+                 #search-jumper.funcKeyCall>.search-jumper-searchBar>.search-jumper-type:hover {
+                     height: auto!important;
+                     width: 252px!important;
+                 }
+                 #search-jumper.funcKeyCall>.search-jumper-searchBar>.search-jumper-type::-webkit-scrollbar {
+                     width: 0 !important;
+                     height: 0 !important;
+                 }
+                 .search-jumper-left,
+                 .search-jumper-left .search-jumper-type,
+                 .search-jumper-left>.search-jumper-searchBar,
+                 .search-jumper-right,
+                 .search-jumper-right .search-jumper-type,
+                 .search-jumper-right>.search-jumper-searchBar {
+                     flex-direction: column;
+                     max-width: 37.800000000000004px;
+                     max-height: unset;
+                 }
+                 .search-jumper-left {
+                     height: 100%;
+                     text-align: initial;
+                 }
+                 .search-jumper-right {
+                     left: unset;
+                     right: 0;
+                     height: 100%;
+                 }
+                 .searchJumperExpand {
+                     opacity: 0.8;
+                 }
+                 .searchJumperExpand:hover {
+                     opacity: 1;
+                 }
+                 .searchJumperExpand>svg {
+                     transform: rotate(-90deg);
+                     border-radius: 20px;
+                     filter: drop-shadow(0px 0px 2px black);
+                     width: unset;
+                     height: unset;
+                     color: black;
+                     fill: black;
+                 }
+                 .search-jumper-type.search-jumper-open>span.search-jumper-word {
+                     filter: drop-shadow(0px 0px 2px black);
+                 }
+                 .search-jumper-left .searchJumperExpand>svg,
+                 .search-jumper-right .searchJumperExpand>svg {
+                     transform: unset;
+                 }
+                 .search-jumper-bottom {
+                     top: unset;
+                     bottom: 0;
+                     height: 37.800000000000004px;
+                     max-height: 38.7px;
+                     overflow-y: hidden;
+                 }
+                 .search-jumper-left>.search-jumper-searchBar {
+                     margin-top: 0;
+                     margin-left: -18px;
+                 }
+                 .hideAll.search-jumper-left>.search-jumper-searchBar {
+                     margin-left: -36px;
+                 }
+                 .search-jumper-right>.search-jumper-searchBar {
+                     margin-top: 0;
+                     right: -18px;
+                     position: fixed;
+                 }
+                 .hideAll.search-jumper-right>.search-jumper-searchBar {
+                     right: -36px;
+                 }
+                 .search-jumper-left>.search-jumper-searchBar:hover,
+                 .search-jumper-left>.search-jumper-searchBar.initShow,
+                 .resizePage.search-jumper-left>.search-jumper-searchBar,
+                 .search-jumper-left.funcKeyCall>.search-jumper-searchBar,
+                 #search-jumper.in-input.search-jumper-left>.search-jumper-searchBar {
+                     margin-top: unset;
+                     margin-left: 0;
+                     opacity: 1;
+                 }
+                 .search-jumper-right>.search-jumper-searchBar:hover,
+                 .search-jumper-right>.search-jumper-searchBar.initShow,
+                 .resizePage.search-jumper-right>.search-jumper-searchBar,
+                 .search-jumper-right.funcKeyCall>.search-jumper-searchBar,
+                 #search-jumper.in-input.search-jumper-right>.search-jumper-searchBar {
+                     margin-top: unset;
+                     right: 0;
+                     opacity: 1;
+                 }
+                 .search-jumper-bottom>.search-jumper-searchBar {
+                     position: relative;
+                     margin-top: 0px;
+                 }
+                 .hideAll.search-jumper-bottom>.search-jumper-searchBar {
+                     opacity: 0;
+                 }
+                 .search-jumper-bottom>.search-jumper-searchBar:hover,
+                 .search-jumper-bottom>.search-jumper-searchBar.initShow,
+                 .resizePage.search-jumper-bottom>.search-jumper-searchBar,
+                 .search-jumper-bottom.funcKeyCall>.search-jumper-searchBar,
+                 #search-jumper.in-input.search-jumper-bottom>.search-jumper-searchBar {
+                     margin-top: 0px;
+                     opacity: 1;
+                 }
+                 .search-jumper-btn {
+                     position: relative;
+                     display: grid;
+                     padding: 0.9px;
+                     margin: 2.7px;
+                     cursor: pointer;
+                     box-sizing: content-box;
+                     transition:margin-left 0.25s ease, width 0.25s, height 0.25s, transform 0.25s, background 0.25s;
+                     width: 28.8px;
+                     height: 28.8px;
+                     overflow: hidden;
+                     text-overflow: ellipsis;
+                     white-space: nowrap;
+                     text-decoration:none;
+                     min-width: 28.8px;
+                     min-height: 28.8px;
+                 }
+                 .search-jumper-btn>img {
+                     width: 28.8px;
+                     height: 28.8px;
+                 }
+                 .search-jumper-btn>b {
+                     line-height: 28.8px;
+                     letter-spacing: 0;
+                     color: white;
+                 }
+                 .search-jumper-btn.noIcon>b {
+                     color: #f6e9d2;
+                 }
+                 .search-jumper-btn.noIcon:hover>b {
+                     color: wheat;
+                 }
+                 .search-jumper-btn>div {
+                     position: absolute;
+                     width: 100%;
+                     height: 100%;
+                     line-height: 28.8px;
+                     background: black;
+                     border-radius: 18px;
+                     font-size: 27px;
+                     color: wheat;
+                     display: none;
+                 }
+                 .search-jumper-isInPage .search-jumper-btn>div,
+                 .search-jumper-isTargetImg .search-jumper-btn>div,
+                 .search-jumper-isTargetAudio .search-jumper-btn>div,
+                 .search-jumper-isTargetVideo .search-jumper-btn>div,
+                 .search-jumper-isTargetLink .search-jumper-btn>div,
+                 .search-jumper-isTargetPage .search-jumper-btn>div {
+                     animation-name: changeOpacity;
+                     animation-duration: 2s;
+                     animation-iteration-count: 3;
+                     animation-delay: 0.1s;
+                     display: block;
+                     opacity: 0;
+                 }
+                 @keyframes changeOpacity {
+                     0%   {opacity: 0;}
+                     10%  {opacity: 0;}
+                     50%  {opacity: 0.75;}
+                     80%  {opacity: 0;}
+                     100% {opacity: 0;}
+                 }
+                 .searchJumper-loading {
+                     animation-name: changeScale;
+                     animation-duration: 2.5s;
+                     animation-iteration-count: infinite;
+                 }
+                 @keyframes changeScale {
+                     0% {
+                         -webkit-transform:rotate(0deg) scale(1);
+                         -moz-transform:rotate(0deg) scale(1);
+                         transform:rotate(0deg) scale(1);
+                     }
+                     50% {
+                         -webkit-transform:rotate(180deg) scale(1.5);
+                         -moz-transform:rotate(180deg) scale(1.5);
+                         transform:rotate(180deg) scale(1.5);
+                     }
+                     100% {
+                         -webkit-transform:rotate(360deg) scale(1);
+                         -moz-transform:rotate(360deg) scale(1);
+                         transform:rotate(360deg) scale(1);
+                     }
+                 }
+                 .search-jumper-logoBtnSvg {
+                     width: 28.8px;
+                     height: 28.8px;
+                     overflow: hidden;
+                     vertical-align: top;
+                     cursor: grab;
+                 }
+                 .search-jumper-type.search-jumper-needInPage,
+                 .search-jumper-type.search-jumper-targetImg,
+                 .search-jumper-type.search-jumper-targetAudio,
+                 .search-jumper-type.search-jumper-targetVideo,
+                 .search-jumper-type.search-jumper-targetLink,
+                 .search-jumper-type.search-jumper-targetPage,
+                 .search-jumper-isTargetImg>.search-jumper-type,
+                 .search-jumper-isTargetAudio>.search-jumper-type,
+                 .search-jumper-isTargetVideo>.search-jumper-type,
+                 .search-jumper-isTargetLink>.search-jumper-type,
+                 .search-jumper-searchBar:hover>.search-jumper-type.search-jumper-needInPage,
+                 .search-jumper-searchBar:hover>.search-jumper-type.search-jumper-targetImg,
+                 .search-jumper-searchBar:hover>.search-jumper-type.search-jumper-targetAudio,
+                 .search-jumper-searchBar:hover>.search-jumper-type.search-jumper-targetVideo,
+                 .search-jumper-searchBar:hover>.search-jumper-type.search-jumper-targetLink,
+                 .search-jumper-searchBar:hover>.search-jumper-type.search-jumper-targetPage,
+                 .search-jumper-searchBar.search-jumper-isTargetImg:hover>.search-jumper-type,
+                 .search-jumper-searchBar.search-jumper-isTargetAudio:hover>.search-jumper-type,
+                 .search-jumper-searchBar.search-jumper-isTargetVideo:hover>.search-jumper-type,
+                 .search-jumper-searchBar.search-jumper-isTargetLink:hover>.search-jumper-type {
+                     display: none;
+                 }
+                 #search-jumper.in-input .search-jumper-type.search-jumper-open {
+                     width: auto!important;
+                     height: auto!important;
+                 }
+                 #search-jumper.in-input .sitelistCon>div:not(.input-hide)>a {
+                     display: flex!important;
+                 }
+                 #search-jumper .input-hide,
+                 #search-jumper.search-jumper-showall #search-jumper-alllist .sitelist.input-hide {
+                     display: none!important;
+                 }
+                 #search-jumper.in-input .search-jumper-type:not(.input-hide) {
+                     display: inline-flex!important;
+                     flex-wrap: nowrap!important;
+                 }
+                 #search-jumper.in-input .search-jumper-btn:not(.input-hide) {
+                     display: grid!important;
+                 }
+                 #search-jumper>.search-jumper-searchBar>.search-jumper-logo {
+                     display: inline-flex;
+                     background: unset;
+                     padding: 0px;
+                 }
+                 #search-jumper.funcKeyCall>.search-jumper-searchBar>.search-jumper-logo {
+                     display: none;
+                 }
+                 .search-jumper-searchBar>.search-jumper-type.search-jumper-targetAll,
+                 .search-jumper-searchBar:hover>.search-jumper-type.search-jumper-targetAll {
+                     display: inline-flex;
+                 }
+                 .search-jumper-isInPage>.search-jumper-type.search-jumper-needInPage,
+                 .search-jumper-isTargetImg>.search-jumper-type.search-jumper-targetImg,
+                 .search-jumper-isTargetAudio>.search-jumper-type.search-jumper-targetAudio,
+                 .search-jumper-isTargetVideo>.search-jumper-type.search-jumper-targetVideo,
+                 .search-jumper-isTargetLink>.search-jumper-type.search-jumper-targetLink,
+                 .search-jumper-isTargetPage>.search-jumper-type,
+                 .search-jumper-searchBar.search-jumper-isInPage:hover>.search-jumper-type.search-jumper-needInPage,
+                 .search-jumper-searchBar.search-jumper-isTargetImg:hover>.search-jumper-type.search-jumper-targetImg,
+                 .search-jumper-searchBar.search-jumper-isTargetAudio:hover>.search-jumper-type.search-jumper-targetAudio,
+                 .search-jumper-searchBar.search-jumper-isTargetVideo:hover>.search-jumper-type.search-jumper-targetVideo,
+                 .search-jumper-searchBar.search-jumper-isTargetLink:hover>.search-jumper-type.search-jumper-targetLink,
+                 .search-jumper-searchBar.search-jumper-isTargetPage:hover>.search-jumper-type {
+                     display: inline-flex;
+                 }
+                 .search-jumper-type,
+                 .search-jumper-logo {
+                     display: inline-flex;
+                     box-sizing: border-box;
+                     background: #d0d0d0;
+                     border-radius: 18px!important;
+                     overflow: hidden;
+                     padding: 0.2px;
+                     height: 36px;
+                     width: 36px;
+                     max-height: 36px;
+                     min-height: 36px;
+                     min-width: 36px;
+                     transition:width 250ms ease, height 250ms;
+                 }
+                 .search-jumper-right>.searchJumperNavBar {
+                     right: unset;
+                     left: 0;
+                 }
+                 .search-jumper-right>.searchJumperNavBar>#navMarks+div.navPointer {
+                     right: unset;
+                     left: 20px;
+                     transform: rotate(180deg);
+                 }
+                 .search-jumper-bottom>.search-jumper-input {
+                     bottom: unset;
+                     top: 5%;
+                 }
+                 .search-jumper-type.not-expand>a:nth-of-type(12)~a {
+                     display: none;
+                 }
+                 #search-jumper .sitelist {
+                     position: fixed;
+                     text-align: left;
+                     background: #00000000;
+                     max-height: calc(100vh - 20px);
+                     overflow: scroll;
+                     border: 0;
+                     pointer-events: none;
+                     opacity: 0;
+                     transition:opacity 0.25s ease;
+                     scrollbar-width: none;
+                     box-sizing: content-box;
+                 }
+                 #search-jumper .search-jumper-type:hover>.sitelist {
+                     pointer-events: all;
+                     opacity: 1;
+                 }
+                 #search-jumper .sitelist>.sitelistCon {
+                     margin: 10px;
+                     border-radius: 10px;
+                     box-shadow: 0px 0px 10px 0px #7a7a7a;
+                     padding: 0 0 10px 0;
+                     background: #ffffffe0;
+                     opacity: 1;
+                     border: 0;
+                 }
+                 #search-jumper .sitelist>.sitelistCon:hover {
+                     opacity: 1;
+                 }
+                 #search-jumper .sitelist::-webkit-scrollbar {
+                     width: 0 !important;
+                     height: 0 !important;
+                 }
+                 #search-jumper .sitelist>.sitelistCon>div {
+                     padding: 0 10px;
+                 }
+                 #search-jumper .sitelist>.sitelistCon>div:hover {
+                     background: #f5f7fa;
+                 }
+                 #search-jumper .sitelist a {
+                     display: flex;
+                     align-items: center;
+                     text-decoration: none;
+                     cursor: pointer;
+                 }
+                 #search-jumper .sitelist a>img {
+                     width: 20px;
+                     height: 20px;
+                     margin-right: 10px;
+                     margin-top: unset;
+                     max-width: unset;
+                     -moz-transition: transform 0.3s ease;
+                     -webkit-transition: transform 0.3s ease;
+                     transition: transform 0.3s ease;
+                 }
+                 #search-jumper .sitelist a>p {
+                     display: inline-block;
+                     font-size: 15px;
+                     font-family: Arial,sans-serif;
+                     line-height: 25px;
+                     margin: 5px auto;
+                     color: #6b6e74;
+                     flex: 1;
+                     text-align: left;
+                     white-space: nowrap;
+                     transform-origin: left;
+                     -moz-transition: transform 0.3s ease;
+                     -webkit-transition: transform 0.3s ease;
+                     transition: transform 0.3s ease;
+                 }
+                 #search-jumper .sitelist a.dragTarget>img {
+                     -webkit-transform:scale(1.5);
+                     -moz-transform:scale(1.5);
+                     transform:scale(1.5);
+                 }
+                 #search-jumper .sitelist a.dragTarget>p {
+                     -webkit-transform:scale(1.2);
+                     -moz-transform:scale(1.2);
+                     transform: scale(1.2);
+                 }
+                 #search-jumper .sitelist a * {
+                     pointer-events: none;
+                 }
+                 #search-jumper .sitelist>.sitelistCon>p {
+                     color: #565656;
+                     margin: 0;
+                     text-align: center;
+                     font-size: 16px;
+                     font-family: Arial, sans-serif;
+                     font-weight: bold;
+                     background: #f6f6f6;
+                     border-radius: 10px 10px 0 0;
+                     overflow: hidden;
+                     white-space: nowrap;
+                     margin: 0 auto;
+                     text-overflow: ellipsis;
+                     padding: 3px 10px;
+                     position: sticky;
+                     top: 0;
+                     pointer-events: none;
+                 }
+                 .search-jumper-searchBar.disable-pointer>.search-jumper-type {
+                     pointer-events: none;
+                 }
+                 .search-jumper-word {
+                     background: black;
+                     color: #ffffff!important;
+                     font-family: Arial, sans-serif;
+                     font-weight: 500;
+                     border-radius: 18px!important;
+                     font-size: 13.5px;
+                     line-height: 28.8px;
+                     width: 28.8px;
+                     height: 28.8px;
+                     min-width: 28.8px;
+                     min-height: 28.8px;
+                     letter-spacing: 0px;
+                     text-shadow: unset;
+                 }
+                 .search-jumper-word:hover {
+                     font-weight: bold;
+                     text-shadow: 0px 0px 5px #d0d0d0;
+                 }
+                 a.search-jumper-word {
+                     text-decoration: none;
+                     background: white;
+                     color: #111111!important;
+                     filter: drop-shadow(1px 1px 3px #00000060);
+                 }
+                 .funcKeyCall a.search-jumper-word {
+                     background: #f7f7f7a0;
+                 }
+                 a.search-jumper-word>span {
+                     color: #222!important;
+                     border-radius: 20px;
+                     line-height: unset;
+                 }
+                 .search-jumper-type img {
+                     width: 28.8px;
+                     height: 28.8px;
+                     margin-top: unset;
+                 }
+                 .funcKeyCall>.search-jumper-tips {
+                     position: absolute;
+                 }
+                 .search-jumper-tips {
+                     z-index: 2147483647;
+                     pointer-events: none;
+                     position: fixed;
+                     font-size: xx-large;
+                     background: #f5f5f5e0;
+                     border-radius: 10px!important;
+                     padding: 5px;
+                     box-shadow: 0px 0px 10px 0px #000;
+                     font-weight: bold;
+                     transition: all 0.2s ease;
+                     color: black;
+                     white-space: normal;
+                     max-width: 640px;
+                     line-height: 35px;
+                 }
+                 .search-jumper-tips * {
+                     max-width: 640px;
+                 }
+                 .search-jumper-searchBar>.search-jumper-type {
+                     padding: 0px;
+                 }
+                 .search-jumper-searchBar>.search-jumper-type:not(.search-jumper-open) {
+                     background: unset;
+                     border-radius: unset!important;
+                     
+                 }
+                 .search-jumper-searchBar:hover>.search-jumper-type {
+                     
+                 }
+                 .funcKeyCall>.search-jumper-searchBar>.search-jumper-type:not(.search-jumper-open) {
+                     display: none;
+                     border-radius: 18px!important;
+                 }
+                 span.search-jumper-word>img {
+                     width: 18px;
+                     height: 18px;
+                     margin: auto;
+                 }
+                 .search-jumper-searchBar .search-jumper-btn.search-jumper-word:hover {
+                     background: black;
+                 }
+                 .search-jumper-searchBar a.search-jumper-btn.search-jumper-word:hover {
+                     background: white;
+                 }
+                 .search-jumper-btn:hover {
+                     -webkit-transform:scale(1.1);
+                     -moz-transform:scale(1.1);
+                     transform:scale(1.1);
+                     color: white;
+                     text-decoration:none;
+                     filter: drop-shadow(1px 1px 3px #00000050);
+                 }
+                 .search-jumper-btn:active {
+                     -webkit-transform:scale(1.1);
+                     -moz-transform:scale(1.1);
+                     transform:scale(1.1);
+                     transition:unset;
+                     filter: drop-shadow(1px 1px 5px #000000a0);
+                 }
+                 .search-jumper-searchBar .search-jumper-btn.current {
+                     overflow: visible;
+                 }
+                 .search-jumper-searchBar .search-jumper-btn.current::before {
+                     content: '';
+                     position: absolute;
+                     right: -2px;
+                     top: -2px;
+                     border: 1px solid #00000099;
+                     display: inline-block;
+                     width: 10px;
+                     height: 10px;
+                     border-radius: 50%;
+                     background: white;
+                     box-shadow: 0px 0px 3px 0px rgb(0 0 0 / 80%);
+                     opacity: 0.8;
+                 }
+                 .in-input .search-jumper-input {
+                     display: block;
+                     box-sizing: content-box;
+                 }
+                 .lock-input .search-jumper-lock-input {
+                     float: left;
+                     font-size: 20px;
+                     top: 14px;
+                     left: 25px;
+                     color: darkgrey;
+                     position: absolute;
+                     border-right: 2px solid #32373a;
+                     padding-right: 10px;
+                     display: block;
+                 }
+                 .search-jumper-input {
+                     width: 80%;
+                     min-width: 500px;
+                     bottom: 3%;
+                     left: 50%;
+                     margin: 0 0 0 -40%;
+                     position: fixed;
+                     font-family: sans-serif;
+                     background: #F1F1F1;
+                     text-align: left;
+                     box-shadow: 0px 2px 10px rgb(0 0 0 / 80%);
+                     border: 1px solid rgb(179 179 179 / 70%);
+                     border-radius: 28px;
+                     background-color: rgb(51 56 59 / 90%);
+                     padding: 10px;
+                     display: none;
+                     z-index: 2139999999;
+                     font-size: 20px;
+                     height: 36px;
+                     touch-action: none;
+                 }
+                 .inputGroup {
+                     cursor: grab;
+                     display: flex;
+                 }
+                 .inputGroup * {
+                     cursor: default;
+                 }
+                 .search-jumper-input input,
+                 .search-jumper-input textarea {
+                     background-color: #212022;
+                     color: white;
+                     border: none;
+                     font-size: 20px;
+                     height: 35px;
+                     margin-bottom: 0;
+                     padding: 5px;
+                     margin: 0 10px;
+                     border-radius: 3px;
+                     box-shadow: #333 0px 0px 2px;
+                     width: calc(100% - 20px);
+                     outline: none;
+                     box-sizing: border-box;
+                     cursor: text;
+                 }
+                 #searchJumperInput,
+                 #searchJumperInputKeyWords {
+                     width: calc(100% - 11px);
+                     float: left;
+                     transition: 0.25s width ease;
+                 }
+                 #searchJumperInput {
+                     margin: 0 5px 0 10px;
+                 }
+                 #searchJumperInputKeyWords {
+                     margin: 0 10px 0 1px;
+                 }
+                 #searchJumperInputKeyWords:disabled {
+                     opacity: 0.5;
+                     max-width: 20%;
+                     min-width: 20%;
+                 }
+                 #filterSites>input:focus,
+                 #filterSites>textarea:focus {
+                     width: calc(400% - 20px);
+                 }
+                 .search-jumper-input * {
+                     box-sizing: border-box;
+                 }
+                 .search-jumper-input input[type="radio"] {
+                     display: none;
+                 }
+                 .search-jumper-input input:checked + label {
+                     background: #3a444add;
+                     color: white;
+                     font-size: 18px;
+                 }
+                 .search-jumper-input input#filterSitesTab:checked ~ .line {
+                     left: 25px;
+                 }
+                 .search-jumper-input input#filterSitesTab:checked ~ .content-container #filterSites {
+                     opacity: 1;
+                     pointer-events: all;
+                 }
+                 .search-jumper-input input#searchInPageTab:checked ~ .line {
+                     left: 231px;
+                 }
+                 .search-jumper-input input#searchInPageTab:checked ~ .content-container #searchInPage {
+                     opacity: 1;
+                     pointer-events: all;
+                 }
+                 .search-jumper-input label {
+                     display: inline-block;
+                     font-size: 18px;
+                     height: 36px;
+                     line-height: 36px;
+                     width: 200px;
+                     text-align: center;
+                     background: #2a343acc;
+                     color: #959595;
+                     position: relative;
+                     transition: 0.25s background ease;
+                     cursor: pointer;
+                     position: relative;
+                     top: -46px;
+                     left: 15px;
+                     border-radius: 5px 5px 0 0;
+                     user-select: none;
+                     pointer-events: all;
+                     max-width: 40%;
+                     white-space: nowrap;
+                     overflow: hidden;
+                     text-overflow: ellipsis;
+                 }
+                 .search-jumper-input label::after {
+                     content: "";
+                     height: 1px;
+                     width: 100%;
+                     position: absolute;
+                     display: block;
+                     background: #ccc;
+                     bottom: 0;
+                     opacity: 0;
+                     left: 0;
+                     transition: 0.25s ease;
+                 }
+                 .search-jumper-input label:hover::after {
+                     opacity: 1;
+                 }
+                 .search-jumper-input .line {
+                     background: #1E88E5;
+                     width: 200px;
+                     height: 1px;
+                     top: -1px;
+                     left: 0;
+                     transition: 0.25s ease;
+                     position: absolute;
+                 }
+                 .inputGroup>.svgBtns {
+                     right: 20px;
+                     top: 10px;
+                     height: 35px;
+                     position: absolute;
+                     user-select: none;
+                     background: #212022;
+                     white-space: nowrap;
+                     overflow: hidden;
+                     display: flex;
+                     align-items: center;
+                 }
+                 .inputGroup>.svgBtns:hover {
+                     width: auto;
+                 }
+                 .inputGroup>.svgBtns>svg {
+                     margin: 0 2px;
+                 }
+                 .inputGroup svg.checked {
+                     fill: #1E88E5;
+                 }
+                 @media screen and (max-width: 800px) {
+                     .search-jumper-input .line {
+                         display: none;
+                     }
+                     .search-jumper-input {
+                         min-width: 300px;
+                     }
+                     .inputGroup>.svgBtns {
+                         width: 25px;
+                     }
+                 }
+                 .search-jumper-input .content-container {
+                     background: #eee;
+                     position: static;
+                     font-size: 16px;
+                 }
+                 .search-jumper-input .content-container .inputGroup {
+                     position: absolute;
+                     padding: 10px;
+                     width: 100%;
+                     top: 0;
+                     left: 0;
+                     opacity: 0;
+                     pointer-events: none;
+                     transition: 0.25s ease;
+                     color: #333;
+                 }
+                 .search-jumper-input svg,
+                 .searchJumperNavBar svg {
+                     width: 25px;
+                     height: 25px;
+                     fill: white;
+                     cursor: pointer;
+                     opacity: 0.8;
+                     transition: 0.25s all ease;
+                     font-size: 0px;
+                 }
+                 .search-jumper-input .inputGroup:hover svg,
+                 .searchJumperNavBar.show svg {
+                     pointer-events: all;
+                 }
+                 .search-jumper-input svg *,
+                 .searchJumperNavBar svg * {
+                     cursor: pointer;
+                 }
+                 .search-jumper-input svg:hover,
+                 .searchJumperNavBar svg:hover {
+                     -webkit-transform:scale(1.2);
+                     -moz-transform:scale(1.2);
+                     transform:scale(1.2);
+                     opacity: 1;
+                 }
+                 #search-jumper.selectedEle #filterSites>.svgBtns>svg {
+                     display: inline-block!important;
+                 }
+                 .search-jumper-input>.closeBtn {
+                     position: absolute;
+                     right: 0px;
+                     top: -39px;
+                     width: 35px;
+                     height: 35px;
+                     vertical-align: middle;
+                     fill: #454a4b;
+                     overflow: hidden;
+                     background: white;
+                     border-radius: 20px;
+                     pointer-events: all;
+                 }
+                 #searchInPage>.lockWords {
+                     max-width: 50%;
+                     position: absolute;
+                     bottom: 8px;
+                     left: 20px;
+                     color: white;
+                     font-size: 18px;
+                     display: flex;
+                     flex-wrap: wrap-reverse;
+                     max-height: 38px;
+                     overflow: hidden;
+                 }
+                 #searchInPage>.lockWords:hover {
+                     overflow-y: auto;
+                     height: auto;
+                     max-height: 90vh;
+                 }
+                 #searchInPage>.lockWords>span {
+                     position: relative;
+                     padding: 5px;
+                     cursor: alias;
+                     user-select: none;
+                     background: yellow;
+                     color: black;
+                     border: 1px solid;
+                     margin: 2px;
+                     display: flex;
+                     align-items: center;
+                     white-space: nowrap;
+                     max-width: 100%;
+                 }
+                 #searchInPage>.lockWords .removeWord {
+                     position: absolute;
+                     right: 0;
+                     top: 0;
+                     display: none;
+                     opacity: 0.3;
+                 }
+                 #searchInPage>.lockWords .removeWord:hover {
+                     opacity: 1;
+                 }
+                 #searchInPage>.lockWords>span:hover .removeWord {
+                     display: block;
+                     pointer-events: all;
+                 }
+                 #searchInPage>.lockWords .removeWord>svg {
+                     width: 15px;
+                     height: 15px;
+                     fill: black;
+                     color: black;
+                     border: 1px solid white;
+                     border-radius: 10px;
+                     background: white;
+                 }
+                 #searchInPage>.lockWords>span>em {
+                     font-size: 12px;
+                     margin-right: 5px;
+                     color: unset;
+                 }
+                 .searchJumperNavBar {
+                     all: unset;
+                     top: 0px;
+                     bottom: 0px;
+                     right: 0px;
+                     position: fixed;
+                     width: 20px;
+                     z-index: 2147483647;
+                     background: #00000066;
+                     text-align: center;
+                     pointer-events: none;
+                     font-size: 0px;
+                     opacity: 0;
+                 }
+                 .searchJumperNavBar.show {
+                     pointer-events: all;
+                     opacity: 1;
+                 }
+                 .search-jumper-showall > .searchJumperNavBar.show {
+                     opacity: 0;
+                 }
+                 .searchJumperNavBar>.closeNavBtn {
+                     width: 16px;
+                     height: 16px;
+                     fill: white;
+                     cursor: pointer;
+                 }
+                 #navMarks+.navPointer {
+                     pointer-events: none;
+                     position: absolute;
+                     right: 20px;
+                     text-shadow: #fff 1px 0 0, #fff 0 1px 0, #fff -1px 0 0, #fff 0 -1px 0;
+                     font-size: 30px;
+                     line-height: 0px;
+                     border: 0;
+                     margin-top: 2px;
+                     opacity: 0.8;
+                     color: black;
+                     transition: top 0.25s ease;
+                 }
+                 #navMarks {
+                     height: 100%;
+                     width: 100%;
+                     position: absolute;
+                 }
+                 #navMarks>span {
+                     height: 0.5vh;
+                     width: 100%;
+                     position: absolute;
+                     border: 1px solid #999999;
+                     min-height: 3px;
+                     box-sizing: border-box;
+                     left: 0;
+                     border-radius: 0px!important;
+                 }
+                 mark.searchJumper {
+                     visibility: visible;
+                     font-style: normal;
+                     box-shadow: rgba(0, 0, 0, 0.3) 1px 1px 3px;
+                     border-radius: 3px;
+                     text-decoration: none;
+                     padding: 1px 0;
+                 }
+                 mark.searchJumper[data-current=true] {
+                     border-bottom: 0.2em solid;
+                     border-bottom-left-radius: 0;
+                     border-bottom-right-radius: 0;
+                     animation: 0.5s linear 0s 5 normal none running currentMark;
+                 }
+                 .searchJumperPosBar {
+                     background: rgba(29, 93, 163, 0.3);
+                     position: absolute;
+                     min-height: 10px;
+                     min-width: 10px;
+                     animation-duration: 3s;
+                     z-index: 2147483647;
+                     margin: 0;
+                     opacity: 0;
+                     pointer-events: none;
+                     transition: 0.25s all ease;
+                 }
+                 .searchJumperPosBar.searchJumperPosW {
+                     width: 100%;
+                     left: 0;
+                 }
+                 .searchJumperPosBar.searchJumperPosH {
+                     height: 100%;
+                     top: 0;
+                     position: fixed;
+                 }
+                 @keyframes fadeit {
+                     from {opacity: 1;}
+                     to {opacity: 0;}
+                 }
+                 @keyframes currentMark {
+                     from {border-color: unset}
+                     to {border-color: transparent;}
+                 }
+                 #rightSizeChange {
+                     top: 0;
+                     opacity: 0;
+                     height: 55px;
+                     width: 5px;
+                     position: absolute;
+                     cursor: e-resize;
+                     right: 0;
+                 }
+                 .searchJumper-hide {
+                     display: none!important;
+                 }
+                 .search-jumper-historylist>a.search-jumper-btn {
+                     filter: drop-shadow(0px 0px 3px #00000050);
+                 }
+                 #search-jumper .listArrow {
+                     width: 0;
+                     height: 0;
+                     border: 10px solid transparent;
+                     pointer-events: none;
+                     border-bottom-color: white;
+                     position: fixed;
+                     opacity: 0;
+                     visibility: hidden;
+                     z-index: 2147483647;
+                     transition: opacity .3s ease, top .15s, bottom .15s, left .15s, right .15s;
+                 }
+                 #search-jumper.search-jumper-left .listArrow {
+                     border-bottom-color: transparent;
+                     border-right-color: white;
+                 }
+                 #search-jumper.search-jumper-right .listArrow {
+                     border-bottom-color: transparent;
+                     border-left-color: white;
+                 }
+                 #search-jumper.search-jumper-bottom .listArrow {
+                     border-bottom-color: transparent;
+                     border-top-color: white;
+                 }
+                 @media (prefers-color-scheme: dark) {
+                     /* 站点列表 */
+                     #search-jumper .sitelist > .sitelistCon > p {
+                         background-color: #252B32 !important;
+                     }
+
+                     #search-jumper .sitelist > .sitelistCon {
+                         background-color: #1C2127e0 !important;
+                     }
+
+                     #search-jumper .sitelist > .sitelistCon > div:hover {
+                         background-color: #283C57 !important;
+                     }
+
+                     #search-jumper .sitelist > .sitelistCon > p,
+                     #search-jumper .sitelist a > p {
+                         color: #DADADA !important;
+                     }
+                     #search-jumper .listArrow {
+                         border-bottom-color: #1C2127;
+                     }
+                     #search-jumper.search-jumper-left .listArrow {
+                         border-bottom-color: transparent;
+                         border-right-color: #1C2127;
+                     }
+                     #search-jumper.search-jumper-right .listArrow {
+                         border-bottom-color: transparent;
+                         border-left-color: #1C2127;
+                     }
+                     #search-jumper.search-jumper-bottom .listArrow {
+                         border-bottom-color: transparent;
+                         border-top-color: #1C2127;
+                     }
+
+                     /* 历史列表 */
+                     .search-jumper-historylist {
+                         background-color: #181C20e0 !important;
+                     }
+
+                     .search-jumper-historylist>a.search-jumper-btn {
+                         filter: drop-shadow(0px 0px 3px #ffffff50);
+                     }
+
+                     .search-jumper-showall a.search-jumper-word,
+                     .search-jumper-showall a.search-jumper-word > span {
+                         background-color: #292A2D !important;
+                     }
+
+                     .search-jumper-tips {
+                         background-color: #3F4042e0;
+                         color: #DADADA;
+                     }
+
+                     .search-jumper-showall a.search-jumper-word > span {
+                         color: #DADADA !important;
+                     }
+
+                     .search-jumper-showall .search-jumper-word:hover {
+                         text-shadow: 0px 0px 5px #2374FF !important;
+                     }
+
+                     /* 类别 */
+                     .search-jumper-showall .search-jumper-type,
+                     .search-jumper-showall .search-jumper-logo {
+                         background-color: #181C20 !important;
+                     }
+                 }
+                 </style>
+
+    <style>
+                    /* 侧边栏 */
+        .sidebar a {
+        user-select: none;
+        font-family: "Comic Sans MS", cursive, sans-serif; 
+        font-size: 100px;
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        transition: color 0.3s ease;
+        position: absolute; 
+        left: -80px; /* 将它们放在屏幕之外 */
+        transition: 0.3s; /* 在悬停时添加过渡 */
+        padding: 15px; /* 15px 内边距 */
+        width: 100px; /* 设置特定宽度 */
+        text-decoration: none; /* 删除下划线 */
+        font-size: 20px; /* 增加字体大小 */
+        color: rgba(255, 255, 255, 0); /* 白色文本颜色 */
+        border-radius: 0 5px 5px 0; /* 右上角和右下角的圆角 */
+        z-index: 1;
+        text-align: left;
+        }
+
+
+        .sidebar a:hover {
+        text-align: center;
+        left: 0; 
+        color: white;
+        }
+
+        #return {
+        top:40px;
+        background-color: #4c6aaf;
+        }
+</style>
+</head>  
+
+
+
+
+
+<body bgcolor="#f7f7f0" onload="ifnight();start();">
+    <div class="sidebar">
+        <a id="return" href="../../tools.html" class="choice">Return</a>
+    </div>
+<center>
+<div style="margin-top:0.8rem;">
+<b>扫雷</b>
+</div>
+<div style="margin-top:0.8rem;">
+<a href="javascript:_123(1)">基础</a>
+&nbsp;
+<a href="javascript:_123(2)">中级</a>
+&nbsp;
+<a href="javascript:_123(3)">专家</a>
+&nbsp;
+<a href="javascript:_123(4)">满屏</a>
+&nbsp;
+<a href="javascript:_123(5)">自定义</a>
+</div>
+<div id="custom" style="margin-top: 5px;">
+横<input id="hm" type="number" value="40">
+竖<input id="vm" type="number" value="24">
+雷<input id="mm" type="number" value="199">
+<input type="button" onclick="udf()" value="确定">
+</div>
+<table style="margin-top:0.8rem;border-radius:6px;background:#cccccc">
+<tbody><tr><td style="padding:9px;">
+
+<table id="p42" class="pad" style="height: 34px; width: 504px;">
+<tbody><tr>
+<td width="50%"><canvas id="rm" height="23" width="39"></canvas></td>
+<td align="center" onmouseup="_45()" style="padding:0 8 0 8"><img id="face" src="data:img/gif;base64,R0lGODlhFQAVAJEAAAAAAP//AL29vQAAACH5BAAHAP8ALAAAAAAVABUAAAJAlI+py50AoUMwWCsduBy33XXAAoaiUlZY+nBq8MKUSY9HSbtzft4X/vu1MCLhcBXRoXgyBlD5AWYmgsiUis0yCgA7">
+</td><td width="50%" align="right"><canvas id="es" height="23" width="39"></canvas></td>
+</tr></tbody></table>
+<canvas id="paf" class="pad" style="margin-top:6px;" width="500" height="500"></canvas>
+</td></tr><tr><td align="right">
+</td></tr></tbody></table>
+<div style="margin-top:2rem;">
+<a id="ss" href="http://www.minesweeper.cn/scores.htm#5"></a>
+</div>
+<a id="setm" href="javascript:mouse2()"></a>
+</center>
+
+</body></html>
