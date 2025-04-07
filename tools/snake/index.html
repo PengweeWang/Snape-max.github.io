@@ -70,13 +70,13 @@
 </div>
 
 <div id="control" style="display: none;">
-<button class="key" id="w" onclick="javascript:document.dispatchEvent(new KeyboardEvent('keydown', {'keyCode':87,'which':87}));">W</button>
-<button class="key" id="a" onclick="javascript:document.dispatchEvent(new KeyboardEvent('keydown', {'keyCode':65,'which':65}));">A</button>
-<button class="key" id="s" onclick="javascript:document.dispatchEvent(new KeyboardEvent('keydown', {'keyCode':83,'which':83}));">S</button>
-<button class="key" id="d" onclick="javascript:document.dispatchEvent(new KeyboardEvent('keydown', {'keyCode':68,'which':68}));">D</button>
-<button class="key" id="space" onclick="javascript:document.dispatchEvent(new KeyboardEvent('keydown', {'keyCode':32,'which':32}));">SPACE</button>
-<button class="key" id="i" onclick="javascript:document.dispatchEvent(new KeyboardEvent('keydown', {'keyCode':73,'which':73}));">A🤖I</button>
+<button class="key" id="w" onclick="javascript:document.dispatchEvent(new KeyboardEvent('keydown', {'keyCode':87,'which':87, key: 'w'}));">W</button>
+<button class="key" id="a" onclick="javascript:document.dispatchEvent(new KeyboardEvent('keydown', {'keyCode':65,'which':65, key: 'a'}));">A</button>
+<button class="key" id="s" onclick="javascript:document.dispatchEvent(new KeyboardEvent('keydown', {'keyCode':83,'which':83, key: 's'}));">S</button>
+<button class="key" id="d" onclick="javascript:document.dispatchEvent(new KeyboardEvent('keydown', {'keyCode':68,'which':68, key: 'd'}));">D</button>
+<button class="key" id="space" onclick="javascript:document.dispatchEvent(new KeyboardEvent('keydown', {'keyCode':32,'which':32, key: ' '}));">SPACE</button>
+<button class="key" id="i" onclick="javascript:document.dispatchEvent(new KeyboardEvent('keydown', {'keyCode':73,'which':73, key: 'i'}));">A🤖I</button>
 </div>
 
-<script src="./game.js" charset="UTF-8" type="module">
+<script src="./script.js" charset="UTF-8" type="module">
 </script>
