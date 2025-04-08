@@ -84,6 +84,10 @@ class SnakeGame {
                 }
             }
         }
+        if (availablePositions.length == 0){
+            this.gameWin(); 
+            return;
+        } 
         var xyIndex = Math.floor(Math.random()*availablePositions.length);
         var x = availablePositions[xyIndex][0];
         var y = availablePositions[xyIndex][1]; 
@@ -161,6 +165,7 @@ class SnakeGame {
     }
 
     drawFood() {
+        if(this.foodPos == undefined) return;
         // // console.log(this.foodPos)
         this.snakeCtx.shadowColor = 'orange';
         this.snakeCtx.shadowBlur = 15;
@@ -353,6 +358,13 @@ class SnakeGame {
     gameOver() {
         this.panel.innerHTML = 
         "<h1>NO GAME OVER</h1><p>SCORE: "+(this.snakePos.length - 5)+"</p><p>重新开始请刷新</p>";
+        this.isRunning = undefined;
+        this.panel.style.display = "block"
+    }
+
+    gameWin() {
+        this.panel.innerHTML = 
+        "<h1 style='color: #4CAF50; text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);'>You Win</h1><p>SCORE: "+(this.snakePos.length - 5)+"</p><p>重新开始请刷新</p>";
         this.isRunning = undefined;
         this.panel.style.display = "block"
     }
