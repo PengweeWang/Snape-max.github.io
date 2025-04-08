@@ -52,8 +52,10 @@ class SnakeGame {
 
     mapCtx = document.getElementById("canvas").getContext('2d');
     snakeCtx = document.getElementById("snake").getContext('2d');
+    scoreDom = document.getElementById('scoreDisplay');
+    gameStatusDom = document.getElementById('gameStatus');
     panel = document.getElementById("panel");
-    snakePos = [[8,10-4],[8,11-4],[8,12-4],[8,13-4],[8,14-4]];
+    snakePos = [[2,10-4],[2,11-4],[2,12-4],[2,13-4],[2,14-4]];
     foodPos = this.getAvailablePos();
     snakeDirection = DIRECTION.UP;
     isRunning = false;
@@ -116,7 +118,7 @@ class SnakeGame {
         snakeCanvas.Zindex = 1;
         // 设置panel样式
         var panelStyle = this.panel.style;
-        panelStyle.height = 450;
+        panelStyle.height = 180;
         panelStyle.width = 300;
         panelStyle.margin = "auto";
         panelStyle.left = 0;
@@ -159,39 +161,96 @@ class SnakeGame {
     }
 
     drawFood() {
-        // console.log(this.foodPos)
+        // // console.log(this.foodPos)
+        this.snakeCtx.shadowColor = 'orange';
+        this.snakeCtx.shadowBlur = 15;
         this.snakeCtx.fillStyle = "orange";
         this.snakeCtx.fillRect(MAP.CELL_SIZE*this.foodPos[0]+2,MAP.CELL_SIZE*this.foodPos[1]+MAP.CELL_SIZE*0.15,MAP.CELL_SIZE*0.7,MAP.CELL_SIZE*0.7);
     
         this.snakeCtx.fillStyle = "green";
         this.snakeCtx.fillRect(MAP.CELL_SIZE*this.foodPos[0]+MAP.CELL_SIZE*0.30,MAP.CELL_SIZE*this.foodPos[1]+1,MAP.CELL_SIZE*0.2,MAP.CELL_SIZE*0.2);
         this.snakeCtx.fillRect(MAP.CELL_SIZE*this.foodPos[0]+MAP.CELL_SIZE*0.25,MAP.CELL_SIZE*this.foodPos[1] - 2,MAP.CELL_SIZE*0.1,MAP.CELL_SIZE*0.1);
+
+    }
+
+    // 添加圆角矩形方法
+    roundRect(x, y, width, height, radius) {
+        this.snakeCtx.beginPath();
+        this.snakeCtx.moveTo(x + radius, y);
+        this.snakeCtx.lineTo(x + width - radius, y);
+        this.snakeCtx.quadraticCurveTo(x + width, y, x + width, y + radius);
+        this.snakeCtx.lineTo(x + width, y + height - radius);
+        this.snakeCtx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+        this.snakeCtx.lineTo(x + radius, y + height);
+        this.snakeCtx.quadraticCurveTo(x, y + height, x, y + height - radius);
+        this.snakeCtx.lineTo(x, y + radius);
+        this.snakeCtx.quadraticCurveTo(x, y, x + radius, y);
+        this.snakeCtx.closePath();
     }
 
     drawSnake() {
-        // 生成彩虹渐变色
-        let colors = createRainbow(this.snakePos.length*7);
-        let SnakeLength = this.snakePos.length
-        for (let i = 0; i < SnakeLength; i++) {
-            // 设置填充样式为当前颜色
-            this.snakeCtx.fillStyle = `rgb(${colors[i][0]}, ${colors[i][1]}, ${colors[i][2]})`;
-            // 绘制蛇的身体
-            this.snakeCtx.fillRect(MAP.CELL_SIZE * this.snakePos[i][0], MAP.CELL_SIZE * this.snakePos[i][1] + 1, MAP.CELL_SIZE, MAP.CELL_SIZE);
-            
-            // 添加阴影效果（可选）
-            this.snakeCtx.strokeStyle = "white";
-            this.snakeCtx.strokeRect(MAP.CELL_SIZE * this.snakePos[i][0], MAP.CELL_SIZE * this.snakePos[i][1] + 1, MAP.CELL_SIZE, MAP.CELL_SIZE);
-        }
-    
-        // 绘制蛇头的眼睛
-        this.snakeCtx.fillStyle = "black";
-        this.snakeCtx.fillRect(MAP.CELL_SIZE*this.snakePos[0][0]+MAP.CELL_SIZE*0.15,MAP.CELL_SIZE*this.snakePos[0][1]+ MAP.CELL_SIZE*0.2,MAP.CELL_SIZE*0.2,MAP.CELL_SIZE*0.2);
-        this.snakeCtx.fillRect(MAP.CELL_SIZE*this.snakePos[0][0]+MAP.CELL_SIZE*0.65,MAP.CELL_SIZE*this.snakePos[0][1]+ MAP.CELL_SIZE*0.2,MAP.CELL_SIZE*0.2,MAP.CELL_SIZE*0.2);
-    
         // 绘制舌头
         this.snakeCtx.fillStyle = "coral";
         this.snakeCtx.fillRect(MAP.CELL_SIZE * this.snakePos[0][0] + MAP.CELL_SIZE*0.15, MAP.CELL_SIZE * this.snakePos[0][1] - MAP.CELL_SIZE*0.2 + 2, MAP.CELL_SIZE*0.2, MAP.CELL_SIZE*0.2);
         this.snakeCtx.fillRect(MAP.CELL_SIZE * this.snakePos[0][0] + MAP.CELL_SIZE*0.65, MAP.CELL_SIZE * this.snakePos[0][1] - MAP.CELL_SIZE*0.2 + 2, MAP.CELL_SIZE*0.2, MAP.CELL_SIZE*0.2);
+        let colors = createRainbow(this.snakePos.length);
+    
+        // 绘制蛇身
+        for (let i = 0; i < this.snakePos.length; i++) {
+            // 渐变效果
+            let gradient = this.snakeCtx.createRadialGradient(
+                MAP.CELL_SIZE * this.snakePos[i][0] + MAP.CELL_SIZE/2,
+                MAP.CELL_SIZE * this.snakePos[i][1] + MAP.CELL_SIZE/2,
+                0,
+                MAP.CELL_SIZE * this.snakePos[i][0] + MAP.CELL_SIZE/2,
+                MAP.CELL_SIZE * this.snakePos[i][1] + MAP.CELL_SIZE/2,
+                MAP.CELL_SIZE/2
+            );
+            
+            gradient.addColorStop(0, `rgba(${colors[i][0]}, ${colors[i][1]}, ${colors[i][2]}, 1)`);
+            gradient.addColorStop(1, `rgba(${colors[i][0]}, ${colors[i][1]}, ${colors[i][2]}, 0.7)`);
+            
+            this.snakeCtx.fillStyle = gradient;
+            
+            // 圆角矩形
+            this.roundRect(
+                MAP.CELL_SIZE * this.snakePos[i][0] + 2,
+                MAP.CELL_SIZE * this.snakePos[i][1] + 2,
+                MAP.CELL_SIZE - 4,
+                MAP.CELL_SIZE - 4,
+                10
+            );
+            this.snakeCtx.fill();
+            
+            // 边框
+            this.snakeCtx.strokeStyle = "rgba(255, 255, 255, 0.3)";
+            this.snakeCtx.lineWidth = 2;
+            this.snakeCtx.stroke();
+        }
+        
+        // 绘制蛇头
+        if (this.snakePos.length > 0) {
+            // 眼睛
+            this.snakeCtx.fillStyle = "black";
+            this.snakeCtx.beginPath();
+            this.snakeCtx.arc(
+                MAP.CELL_SIZE*this.snakePos[0][0]+MAP.CELL_SIZE*0.3,
+                MAP.CELL_SIZE*this.snakePos[0][1]+ MAP.CELL_SIZE*0.3,
+                MAP.CELL_SIZE*0.1,
+                0,
+                Math.PI * 2
+            );
+            this.snakeCtx.arc(
+                MAP.CELL_SIZE*this.snakePos[0][0]+MAP.CELL_SIZE*0.7,
+                MAP.CELL_SIZE*this.snakePos[0][1]+ MAP.CELL_SIZE*0.3,
+                MAP.CELL_SIZE*0.1,
+                0,
+                Math.PI * 2
+            );
+            this.snakeCtx.fill();
+        
+        }
+    
     }
 
     // 清除蛇
@@ -232,10 +291,21 @@ class SnakeGame {
     }
 
     gameLoop = () =>  {
+        this.scoreDom.textContent = `分数: ${this.score}`;
+        let statusText = '';
+        if (this.isAIEnabled) statusText = 'AI模式';
+        else if (!this.isRunning) statusText = '暂停中';
+        else statusText = '游戏中';
+        this.gameStatusDom.textContent = statusText;
+
         if (!this.isRunning) {
             requestAnimationFrame(() => this.gameLoop());
             return;
         }
+
+
+
+
         const currentTime = performance.now();
         const deltaTime = currentTime - this.lastTime;
             
@@ -243,7 +313,7 @@ class SnakeGame {
             this.lastTime = currentTime - (deltaTime % this.updateInterval);
 
             this.clearSnake();
-            this.drawSnake();
+            // this.drawSnake();
             this.updateInterval = 250;
             if (this.isAIEnabled){
                 this.snakeDirection = this.aiGamer();
@@ -455,5 +525,66 @@ class SnakeGame {
 
 
 
+// 添加背景粒子效果
+class BackgroundParticles {
+    constructor() {
+        this.particles = [];
+        this.canvas = document.createElement('canvas');
+        this.canvas.style.position = 'absolute';
+        this.canvas.style.top = '0';
+        this.canvas.style.left = '0';
+        this.canvas.style.zIndex = '-1';
+        document.body.appendChild(this.canvas);
+        this.ctx = this.canvas.getContext('2d');
+        this.resize();
+        window.addEventListener('resize', () => this.resize());
+        
+        // 初始化粒子
+        for (let i = 0; i < 100; i++) {
+            this.particles.push({
+                x: Math.random() * this.canvas.width,
+                y: Math.random() * this.canvas.height,
+                size: Math.random() * 3 + 1,
+                speedX: Math.random() * 0.5 - 0.25,
+                speedY: Math.random() * 0.5 - 0.25,
+                color: `rgba(255, 255, 255, ${Math.random() * 0.1 + 0.05})`
+            });
+        }
+    }
+    
+    resize() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+    }
+    
+    update() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        for (let i = 0; i < this.particles.length; i++) {
+            const p = this.particles[i];
+            
+            p.x += p.speedX;
+            p.y += p.speedY;
+            
+            // 边界检查
+            if (p.x < 0 || p.x > this.canvas.width) p.speedX *= -1;
+            if (p.y < 0 || p.y > this.canvas.height) p.speedY *= -1;
+            
+            this.ctx.fillStyle = p.color;
+            this.ctx.beginPath();
+            this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            this.ctx.fill();
+        }
+        
+        requestAnimationFrame(() => this.update());
+    }
+}
+
+
+
+
+
 const game = new SnakeGame();
+const bgParticles = new BackgroundParticles();
+bgParticles.update();
 game.start()

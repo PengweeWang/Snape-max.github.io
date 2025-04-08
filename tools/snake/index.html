@@ -1,20 +1,75 @@
 <title>贪吃龙</title>
 
 <style>
-    button{
-        text-align: center;
+    /* 更新CSS样式 */
+    body {
+        background: linear-gradient(135deg, #355c7d, #6c5b7b, #c06c84);
+        margin: 0;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+        overflow: hidden;
+        height: 100vh;
+    }
+
+    #canvas, #snake {
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .key {
+        width: 180px;
+        height: 180px;
+        font-size: 30px;
+        background: rgba(255, 255, 255, 0.2);
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        color: white;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
         align-items: center;
         justify-content: center;
-        background-color: rgb(255, 255, 255);
-        border-radius: 10px;
-        border-width: 6px;
     }
-    .key{
-        width: 200px;
-        height: 100px;
-        display: flex;
+
+    .key:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: scale(1.1);
+    }
+
+    #panel {
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         text-align: center;
-        font-size: 50px;
+        align-items: center;
+    }
+
+    #panel h1 {
+        color: #ff6b6b;
+        text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+    }
+    
+    #scoreDisplay {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        color: white;
+        font-size: 24px;
+        text-shadow: 0 0 5px black;
+        z-index: 100;
+    }
+
+    #gameStatus {
+        position: fixed;
+        top: 60px;
+        right: 20px;
+        color: white;
+        font-size: 18px;
+        text-shadow: 0 0 5px black;
+        z-index: 100;
     }
     #w{
         top: 0;
@@ -58,9 +113,6 @@
         position: absolute;
         display: flex;
     }
-    body {
-        background: #355c7d;
-    }
 </style>
 <canvas id="canvas"></canvas>
 <canvas id="snake"></canvas>
@@ -75,8 +127,11 @@
 <button class="key" id="s" onclick="javascript:document.dispatchEvent(new KeyboardEvent('keydown', {'keyCode':83,'which':83, key: 's'}));">S</button>
 <button class="key" id="d" onclick="javascript:document.dispatchEvent(new KeyboardEvent('keydown', {'keyCode':68,'which':68, key: 'd'}));">D</button>
 <button class="key" id="space" onclick="javascript:document.dispatchEvent(new KeyboardEvent('keydown', {'keyCode':32,'which':32, key: ' '}));">SPACE</button>
-<button class="key" id="i" onclick="javascript:document.dispatchEvent(new KeyboardEvent('keydown', {'keyCode':73,'which':73, key: 'i'}));">A🤖I</button>
+<button class="key" id="i" onclick="javascript:document.dispatchEvent(new KeyboardEvent('keydown', {'keyCode':73,'which':73, key: 'i'}));">🤖</button>
 </div>
+
+<div id="scoreDisplay">分数: 0</div>
+<div id="gameStatus"></div>
 
 <script src="./script.js" charset="UTF-8" type="module">
 </script>

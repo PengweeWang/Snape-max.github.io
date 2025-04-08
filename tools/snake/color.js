@@ -1,7 +1,7 @@
 export default function createRainbow(num){
     var colors = [];
     for(var i = 0; i < num; i++){
-        var h = i / num * (330/360);
+        var h = i / num * (20/360);
         var s = 1;
         var l = 0.5;
         var rgb = hslToRgb(h, s, l);
