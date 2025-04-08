@@ -9,9 +9,9 @@ const DIRECTION = {
 }
 
 const MAP = {
-    WIDTH: 45,
-    HEIGHT: 30,
-    CELL_SIZE: 20,
+    WIDTH: 18,
+    HEIGHT: 12,
+    CELL_SIZE: 50,
     CANVAS_WIDTH: 900,
     CANVAS_HEIGHT: 600,
 }
@@ -53,7 +53,7 @@ class SnakeGame {
     mapCtx = document.getElementById("canvas").getContext('2d');
     snakeCtx = document.getElementById("snake").getContext('2d');
     panel = document.getElementById("panel");
-    snakePos = [[10,10],[10,11],[10,12],[10,13],[10,14]];
+    snakePos = [[8,10-4],[8,11-4],[8,12-4],[8,13-4],[8,14-4]];
     foodPos = this.getAvailablePos();
     snakeDirection = DIRECTION.UP;
     isRunning = false;
@@ -161,37 +161,37 @@ class SnakeGame {
     drawFood() {
         // console.log(this.foodPos)
         this.snakeCtx.fillStyle = "orange";
-        this.snakeCtx.fillRect(20*this.foodPos[0]+2,20*this.foodPos[1]+4,16,16);
+        this.snakeCtx.fillRect(MAP.CELL_SIZE*this.foodPos[0]+2,MAP.CELL_SIZE*this.foodPos[1]+MAP.CELL_SIZE*0.15,MAP.CELL_SIZE*0.7,MAP.CELL_SIZE*0.7);
     
         this.snakeCtx.fillStyle = "green";
-        this.snakeCtx.fillRect(20*this.foodPos[0]+8,20*this.foodPos[1]+1,5,5);
-        this.snakeCtx.fillRect(20*this.foodPos[0]+12,20*this.foodPos[1],3,3);
+        this.snakeCtx.fillRect(MAP.CELL_SIZE*this.foodPos[0]+MAP.CELL_SIZE*0.30,MAP.CELL_SIZE*this.foodPos[1]+1,MAP.CELL_SIZE*0.2,MAP.CELL_SIZE*0.2);
+        this.snakeCtx.fillRect(MAP.CELL_SIZE*this.foodPos[0]+MAP.CELL_SIZE*0.25,MAP.CELL_SIZE*this.foodPos[1] - 2,MAP.CELL_SIZE*0.1,MAP.CELL_SIZE*0.1);
     }
 
     drawSnake() {
         // 生成彩虹渐变色
-        let colors = createRainbow(this.snakePos.length);
+        let colors = createRainbow(this.snakePos.length*7);
         let SnakeLength = this.snakePos.length
         for (let i = 0; i < SnakeLength; i++) {
             // 设置填充样式为当前颜色
             this.snakeCtx.fillStyle = `rgb(${colors[i][0]}, ${colors[i][1]}, ${colors[i][2]})`;
             // 绘制蛇的身体
-            this.snakeCtx.fillRect(20 * this.snakePos[i][0], 20 * this.snakePos[i][1] + 1, 20, 20);
+            this.snakeCtx.fillRect(MAP.CELL_SIZE * this.snakePos[i][0], MAP.CELL_SIZE * this.snakePos[i][1] + 1, MAP.CELL_SIZE, MAP.CELL_SIZE);
             
             // 添加阴影效果（可选）
             this.snakeCtx.strokeStyle = "white";
-            this.snakeCtx.strokeRect(20 * this.snakePos[i][0], 20 * this.snakePos[i][1] + 1, 20, 20);
+            this.snakeCtx.strokeRect(MAP.CELL_SIZE * this.snakePos[i][0], MAP.CELL_SIZE * this.snakePos[i][1] + 1, MAP.CELL_SIZE, MAP.CELL_SIZE);
         }
     
         // 绘制蛇头的眼睛
         this.snakeCtx.fillStyle = "black";
-        this.snakeCtx.fillRect(20*this.snakePos[0][0]+3,20*this.snakePos[0][1]+5,5,5);
-        this.snakeCtx.fillRect(20*this.snakePos[0][0]+12,20*this.snakePos[0][1]+5,5,5);
+        this.snakeCtx.fillRect(MAP.CELL_SIZE*this.snakePos[0][0]+MAP.CELL_SIZE*0.15,MAP.CELL_SIZE*this.snakePos[0][1]+ MAP.CELL_SIZE*0.2,MAP.CELL_SIZE*0.2,MAP.CELL_SIZE*0.2);
+        this.snakeCtx.fillRect(MAP.CELL_SIZE*this.snakePos[0][0]+MAP.CELL_SIZE*0.65,MAP.CELL_SIZE*this.snakePos[0][1]+ MAP.CELL_SIZE*0.2,MAP.CELL_SIZE*0.2,MAP.CELL_SIZE*0.2);
     
         // 绘制舌头
         this.snakeCtx.fillStyle = "coral";
-        this.snakeCtx.fillRect(20 * this.snakePos[0][0] + 3, 20 * this.snakePos[0][1] - 5, 5, 5);
-        this.snakeCtx.fillRect(20 * this.snakePos[0][0] + 12, 20 * this.snakePos[0][1] - 5, 5, 5);
+        this.snakeCtx.fillRect(MAP.CELL_SIZE * this.snakePos[0][0] + MAP.CELL_SIZE*0.15, MAP.CELL_SIZE * this.snakePos[0][1] - MAP.CELL_SIZE*0.2 + 2, MAP.CELL_SIZE*0.2, MAP.CELL_SIZE*0.2);
+        this.snakeCtx.fillRect(MAP.CELL_SIZE * this.snakePos[0][0] + MAP.CELL_SIZE*0.65, MAP.CELL_SIZE * this.snakePos[0][1] - MAP.CELL_SIZE*0.2 + 2, MAP.CELL_SIZE*0.2, MAP.CELL_SIZE*0.2);
     }
 
     // 清除蛇
@@ -436,7 +436,10 @@ class SnakeGame {
                     this.envMap[this.snakePos[i][1]][this.snakePos[i][0]] = 1;
                 }
                 let findTailPath = astar(snakeHead, snakeTail, this.envMap);
-                // if (findFoodPath.length == 1) return this.snakeDirection;
+                if (findTailPath.length == 1) {
+                    console.log(findTailPath)
+                    return this.snakeDirection;
+                }
                 bestDirection = getNextDirection(snakeHead, findTailPath[1]);
             }
             return bestDirection;
