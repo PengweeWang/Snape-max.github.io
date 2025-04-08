@@ -11,6 +11,10 @@
         height: 100vh;
     }
 
+    body * {
+        user-select: none;
+    }
+
     #canvas, #snake {
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
         border-radius: 10px;
@@ -72,7 +76,7 @@
         z-index: 100;
     }
     #w{
-        top: 0;
+        top: -5%;
         left: 0;
         right: 0;
         margin: auto;
@@ -82,13 +86,13 @@
     #a{
         top: 0;
         bottom: 0;
-        left: 0;
+        left: 10%;
         margin: auto;
         position: absolute;
         display: flex;
     }
     #s{
-        bottom: 0;
+        bottom: -5%;
         right: 0;
         left: 0;
         margin: auto;
@@ -98,7 +102,7 @@
 
     #d{
         bottom: 0;
-        right: 0;
+        right: 10%;
         top: 0;
         margin: auto;
         position: absolute;
