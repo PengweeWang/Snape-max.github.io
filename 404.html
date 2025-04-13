@@ -6,7 +6,7 @@
 <meta property="og:image" content="https://qiumo.fun/img/main.jpeg">
 <meta property="article:author" content="Luke Mars">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://qiumo.fun/img/main.jpeg"><link rel="shortcut icon" href="/img/ico.png"><link rel="canonical" href="https://qiumo.fun/404.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+<meta name="twitter:image" content="https://qiumo.fun/img/main.jpeg"><link rel="shortcut icon" href="/img/ico.png"><link rel="canonical" href="https://qiumo.fun/404.html"><link rel="preconnect"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css"><script>
     (() => {
       
     const saveToLocal = {
@@ -123,7 +123,7 @@
   lightbox: 'null',
   Snackbar: undefined,
   infinitegrid: {
-    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    js: '/pluginsSrc/@egjs/infinitegrid/dist/infinitegrid.min.js',
     buttonText: 'Load More'
   },
   isPhotoFigcaption: false,
@@ -169,7 +169,7 @@
       }
 
       const script = document.createElement('script')
-      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+      script.src = '/pluginsSrc/mathjax/es5/tex-mml-chtml.js'
       script.id = 'MathJax-script'
       script.async = true
       document.head.appendChild(script)
@@ -226,7 +226,7 @@
 
     const runMermaidFn = () => runMermaid($mermaid)
     btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
-    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaidFn)
+    window.loadMermaid ? runMermaidFn() : btf.getScript('/pluginsSrc/mermaid/dist/mermaid.min.js').then(runMermaidFn)
   }
 
   btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
