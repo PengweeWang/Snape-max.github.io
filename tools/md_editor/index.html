@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown 在线编辑器</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- markdown-it 核心库 - 使用 cdnjs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/13.0.1/markdown-it.min.js"></script>
+    <!-- markdown-it 插件 - 使用 cdnjs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it-footnote/3.0.3/markdown-it-footnote.min.js"></script>
+    <script src="js/markdown-it-sub.min.js"></script>
+    <script src="js/markdown-it-sup.min.js"></script>
+    <script src="js/markdown-it-task-lists.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <div class="toolbar">
+            <button id="export-btn">导出</button>
+            <button id="import-btn">导入</button>
+            <select id="theme-selector">
+                <option value="themes/default.css">Default</option>
+                <option value="themes/github.css">GitHub</option>
+                <option value="custom">自定义</option>
+            </select>
+            <input type="text" id="custom-theme-input" placeholder="输入CSS URL" style="display: none;">
+            <button id="apply-theme-btn" style="display: none;">应用主题</button>
+            <button id="toggle-preview-btn">切换预览</button>
+            <button id="help-btn">帮助</button>
+        </div>
+        
+        <div class="editor-container">
+            <div id="editor" class="editor"></div>
+            <div class="resizer"></div>
+            <div id="preview" class="markdown-body preview"></div>
+        </div>
+    </div>
+    
+    <!-- KaTeX 数学公式支持 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link id="markdown-theme" rel="stylesheet" href="themes/default.css">
+    <!-- 3. 加载 KaTeX（非AMD版本） -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/contrib/auto-render.min.js"></script>
+    <!-- 加载 Monaco Editor 脚本 -->
+    <script>
+        // 防止 Monaco 自动执行 define
+        var require = { paths: { vs: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.36.1/min/vs' } };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.36.1/min/vs/loader.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.36.1/min/vs/editor/editor.main.nls.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.36.1/min/vs/editor/editor.main.js"></script>
+
+    <script src="code.js"></script>
+</body>
+</html>
