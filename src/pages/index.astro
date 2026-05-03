@@ -9,6 +9,7 @@ import PageLayout from '@/layouts/BaseLayout.astro'
 import ProjectCard from '@/components/home/ProjectCard.astro'
 import EducationCard from '@/components/home/EducationCard.astro'
 import Section from '@/components/home/Section.astro'
+import GitHubActivityCalendar from '@/components/home/GitHubActivityCalendar.astro'
 import config from '@/site-config'
 import nudtBadge from '@/assets/nudt.png'
 
@@ -37,6 +38,7 @@ if (!images[imagePath])
         loading='eager'
         fetchpriority='high'
       />
+      
 
       <div class='flex flex-col items-center gap-y-4'>
         <h1 class='text-3xl font-medium'>{config.author}</h1>
@@ -46,6 +48,7 @@ if (!images[imagePath])
     </section>
 
     <div id='content' class='animate flex flex-col gap-y-10 md:w-4/5 lg:w-5/6'>
+
       <Section title='About'>
         <p class='text-muted-foreground'>Developer / M.S.E.</p>
         <p class='text-muted-foreground'>
@@ -86,6 +89,13 @@ if (!images[imagePath])
             badgeImage={nudtBadge.src}
             link="https://www.nudt.edu.cn/"
           />
+        </div>
+      </Section>
+
+            
+      <Section title='Activity' class='calendar-section'>
+        <div class='grid w-full'>
+          <GitHubActivityCalendar username='PengweeWang' />
         </div>
       </Section>
     </div>
