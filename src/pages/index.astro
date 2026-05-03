@@ -9,7 +9,6 @@ import PageLayout from '@/layouts/BaseLayout.astro'
 import ProjectCard from '@/components/home/ProjectCard.astro'
 import EducationCard from '@/components/home/EducationCard.astro'
 import Section from '@/components/home/Section.astro'
-import GitHubActivityCalendar from '@/components/home/GitHubActivityCalendar.astro'
 import config from '@/site-config'
 import nudtBadge from '@/assets/nudt.png'
 
@@ -89,13 +88,6 @@ if (!images[imagePath])
             badgeImage={nudtBadge.src}
             link="https://www.nudt.edu.cn/"
           />
-        </div>
-      </Section>
-
-            
-      <Section title='Activity' class='calendar-section'>
-        <div class='grid w-full'>
-          <GitHubActivityCalendar username='PengweeWang' />
         </div>
       </Section>
     </div>

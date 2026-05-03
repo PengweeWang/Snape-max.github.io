@@ -2,6 +2,8 @@
 import { Collapse, Spoiler } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
 import ProjectSection from '@/components/projects/ProjectSection.astro'
+import Section from '@/components/home/Section.astro'
+import GitHubActivityCalendar from '@/components/home/GitHubActivityCalendar.astro'
 
 const headings = [
   { depth: 2, slug: 'programs', text: 'Programs' },
@@ -14,6 +16,10 @@ const withBase = (path: string) =>
 ---
 
 <PageLayout title='Projects' {headings}>
+  <div class='grid w-full'>
+    <GitHubActivityCalendar username='PengweeWang' />
+  </div>
+
   <p>Here are some interesting things.</p>
   <h2 id='programs'>Programs</h2>
   <ProjectSection
