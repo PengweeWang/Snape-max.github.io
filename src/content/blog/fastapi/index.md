@@ -6,6 +6,7 @@ tags:
   - Python
   - FastAPI
 language: '中文'
+ai: ai
 ---
 
 ---

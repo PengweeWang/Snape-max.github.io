@@ -9,6 +9,7 @@ heroImage:
   src: './image.png'
   alt: '安徽看海梦境'
   color: '#0D1B2A'
+ai: assisted
 ---
 
 我梦见和我爸妈一块儿去了安徽看海。

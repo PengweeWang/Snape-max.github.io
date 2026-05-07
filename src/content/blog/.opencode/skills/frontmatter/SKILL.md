@@ -15,7 +15,8 @@ compatibility: opencode
 2. 查找文件夹中的 `index.md` 或 `index.mdx` 文件
 3. 读取并解析现有的 frontmatter
 4. 检查目录下是否有图片文件（如 `.jpg`, `.png`, `.webp` 等）
-5. 根据目录状态配置 frontmatter：
+5. 若 `ai` 字段缺失，询问用户："本文是人类撰写、AI 辅助还是 AI 撰写？"，根据回答填入 `human`、`assisted` 或 `ai`
+6. 根据目录状态配置 frontmatter：
    - **未跟踪的新目录**：配置 `publishDate` 为当前日期，添加完整的 frontmatter
    - **已修改的目录**：根据当前日期添加或更新 `updatedDate` 字段
 
@@ -41,6 +42,9 @@ compatibility: opencode
 | `language`    | 语言         | `'English'` |
 | `comment`     | 是否开启评论 | `true`      |
 | `updatedDate` | 更新日期     | 无          |
+| `ai`          | 内容创作方式 | `'human'`   |
+
+`ai` 字段取值：`'human'`（人类撰写）、`'assisted'`（AI 辅助）、`'ai'`（AI 撰写）。
 
 ### 图片处理
 

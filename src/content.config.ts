@@ -39,7 +39,8 @@ const blog = defineCollection({
       language: z.string().optional(),
       draft: z.boolean().default(false),
       // Special fields
-      comment: z.boolean().default(true)
+      comment: z.boolean().default(true),
+      ai: z.enum(['human', 'assisted', 'ai']).default('human')
     })
 })
 

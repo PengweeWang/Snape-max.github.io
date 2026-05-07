@@ -7,6 +7,7 @@ tags:
   - Transformer
 language: 'English'
 heroImage: { src: './aiayn.png', color: '#2563EB' }
+ai: human
 ---
 
 文章原文在 [http://nlp.seas.harvard.edu/annotated-transformer/](http://nlp.seas.harvard.edu/annotated-transformer/)，本人为了便于访问只做转载，著作权归原作者所有

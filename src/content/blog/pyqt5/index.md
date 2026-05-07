@@ -6,6 +6,7 @@ tags:
   - PyQt5
   - GUI
 language: '中文'
+ai: ai
 ---
 
 # PyQt5 使用笔记

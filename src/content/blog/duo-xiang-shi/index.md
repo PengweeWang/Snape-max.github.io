@@ -5,6 +5,7 @@ description: 'MATLAB中多项式详解'
 tags:
   - MATLAB
 language: '中文'
+ai: ai
 ---
 
 **_MATLAB表示多项式为包含由下降幂排列的系数的行向量。_**

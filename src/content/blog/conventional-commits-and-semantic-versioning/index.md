@@ -14,6 +14,7 @@ heroImage:
   color: '#c3c9d8'
 language: Chinese
 comment: true
+ai: assisted
 ---
 
 ## Conventional Commits

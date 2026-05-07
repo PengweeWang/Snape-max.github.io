@@ -7,6 +7,7 @@ tags:
   - 生成模型
 language: 'English'
 heroImage: { src: './8bb17b0d052f439725e08dfee592beb0.png', color: '#7C3AED' }
+ai: human
 ---
 
 ## Introduction

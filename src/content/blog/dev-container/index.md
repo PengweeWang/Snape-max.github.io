@@ -12,6 +12,7 @@ heroImage:
   color: '#2496ED'
 language: Chinese
 comment: true
+ai: human
 ---
 
 # 使用dev-containers进行开发

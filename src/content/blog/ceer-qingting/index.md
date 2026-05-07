@@ -7,6 +7,7 @@ tags:
   - 宫崎骏
 language: '中文'
 heroImage: { src: './ceer.png', color: '#EC4899' }
+ai: human
 ---
 
 ![img](./ceer.png)
