@@ -68,7 +68,7 @@ const primaryColor = data.heroImage?.color ?? 'hsl(var(--primary) / var(--un-tex
     {isAI === 'ai'
       ? <a href="#"><Image src={writtenByAI} alt="Written by AI , Not by a Human" /></a>
       : isAI === 'assisted'
-        ? <a href="https://notbyai.fyi"><Image src={assistedByAI} alt="Assisted by AI" /></a>
+        ? <a href="#"><Image src={assistedByAI} alt="Assisted by AI" /></a>
         : <a href="https://notbyai.fyi"><Image src={writtenByHuman} alt="Written by a Human , Not by AI" /></a>
     }
   </div>
