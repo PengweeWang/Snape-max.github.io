@@ -2,7 +2,7 @@
 title: Grad-CAM：梯度加权类激活映射
 description: 本文详细介绍 Grad-CAM（梯度加权类激活映射）的原理与计算公式，并通过图像分割示例演示其使用方法。
 publishDate: '2026-05-09'
-updatedDate: '2026-05-09'
+updatedDate: '2026-05-10'
 ai: human
 language: Chinese
 tags:
@@ -35,7 +35,7 @@ L^c_{\text{Grad-CAM}} = \operatorname{ReLU}\left( \underbrace{\sum_{k} \alpha_k^
 $$
 
 
-其中 $A^k$ 通常表示特征提取模块的输出的第$k$个通道，成为第$k$个特征图，位于激活函数之前一般来说会选用最后一个卷积层。这是因为:
+其中 $A^k$ 通常表示特征提取模块的输出的第$k$个通道，称为第$k$个特征图，位于激活函数之前一般来说会选用最后一个卷积层。这是因为:
 
 > A number of previous works have asserted that deeper representations in a CNN capture higher-level visual constructs [5, 31]. Furthermore, convolutional features naturally retain spatial information which is lost in fully-connected layers, so we can expect the last convolutional layers to have the best compromise between high-level semantics and detailed spatial information. The neurons in these layers look for semantic class-specific information in the image (say object parts).
 
