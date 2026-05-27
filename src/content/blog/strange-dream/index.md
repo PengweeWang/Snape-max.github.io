@@ -2,7 +2,7 @@
 title: '安徽看海'
 description: '一场关于海啸的梦境记录。梦见和父母在安徽看海，却发现大海突然站了起来，海水从天而降，整座城市被洪水淹没。'
 publishDate: '2026-04-29'
-tags: ['dream', '梦境']
+tags: ['梦境']
 language: 'Chinese'
 comment: true
 heroImage:

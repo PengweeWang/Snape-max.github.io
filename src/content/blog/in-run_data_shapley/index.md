@@ -5,7 +5,7 @@ publishDate: '2026-05-27'
 tags:
   - Data Shapley
   - ICLR
-  - 可解释性
+  - XAI
   - machine learning
   - 数据估值
 heroImage:
