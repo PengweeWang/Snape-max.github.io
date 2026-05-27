@@ -6,7 +6,7 @@ tags:
   - Data Shapley
   - ICLR
   - 可解释性
-  - 机器学习
+  - machine learning
   - 数据估值
 heroImage:
   src: './framework.png'
