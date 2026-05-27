@@ -3,8 +3,8 @@ title: Annotated Transformer
 publishDate: 2025-12-05
 description: 'The Annotated Transformer - Attention is All You Need 的详细注释实现'
 tags:
-  - DeepLearning
-  - Transformer
+  - deep learning
+  - transformer
 language: 'English'
 heroImage: { src: './aiayn.png', color: '#2563EB' }
 ai: human

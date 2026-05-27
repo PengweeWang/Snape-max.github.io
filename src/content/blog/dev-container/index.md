@@ -3,9 +3,9 @@ title: 使用 dev-containers 进行开发
 description: Dev Containers 是一种将 Docker 容器作为完整开发环境的技术方案，通过配置文件定义环境镜像、工具链、依赖和 VS Code 设置实现跨设备、跨团队的一致性开发体验。
 publishDate: 2026-04-27
 tags:
-  - DevOps
-  - Docker
-  - VS Code
+  - devops
+  - docker
+  - vs code
 heroImage:
   src: './image-1.png'
   alt: 'Docker Desktop WSL Integration'

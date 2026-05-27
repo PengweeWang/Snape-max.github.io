@@ -3,7 +3,7 @@ title: MATLAB中集合操作
 publishDate: 2022-06-03
 description: 'MATLAB中集合操作函数'
 tags:
-  - MATLAB
+  - matlab
 language: '中文'
 ---
 

@@ -4,8 +4,8 @@ description: '本文介绍了 In-Run Data Shapley 针对 Adam 优化器的适配
 publishDate: '2026-05-28'
 tags:
   - machine learning
-  - Adam
-  - Data Shapley
+  - adam
+  - data shapley
   - 数据估值
 language: 'Chinese'
 ai: 'assisted'

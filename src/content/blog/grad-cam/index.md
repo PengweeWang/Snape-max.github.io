@@ -6,9 +6,9 @@ updatedDate: '2026-05-10'
 ai: human
 language: Chinese
 tags:
-  - DeepLearning
-  - PyTorch
-  - XAI
+  - deep learning
+  - pytorch
+  - xai
 heroImage:
   src: './layer1-4.jpeg'
   alt: 'Grad-CAM 可视化示例'

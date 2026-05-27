@@ -3,7 +3,7 @@ title: MATLAB中函数详解
 publishDate: 2022-06-02
 description: 'MATLAB中函数详解'
 tags:
-  - MATLAB
+  - matlab
 language: '中文'
 ---
 

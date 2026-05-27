@@ -3,7 +3,7 @@ title: Time Machine
 publishDate: 2025-02-03
 description: 'Time Machine 歌词'
 tags:
-  - Music
+  - music
 language: 'English'
 heroImage: { src: './OIP-C.jpg', color: '#6366F1' }
 ---

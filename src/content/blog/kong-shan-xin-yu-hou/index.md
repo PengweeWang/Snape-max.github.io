@@ -3,7 +3,7 @@ title: 空山新雨后
 publishDate: 2025-01-20
 description: '空山新雨后 - 经典古诗词'
 tags:
-  - Music
+  - music
   - 古诗词
 language: '中文'
 heroImage: { src: './image.png', color: '#65A30D' }

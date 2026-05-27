@@ -3,9 +3,9 @@ title: Data Shapley in One Training Run
 description: 'ICLR 2025 Outstanding Paper Runner-Up: 通过 Ghost Dot-Product 在一次训练中高效计算所有样本的 Data Shapley 值，支持一阶和二阶闭式解近似。'
 publishDate: '2026-05-27'
 tags:
-  - Data Shapley
-  - ICLR
-  - XAI
+  - data shapley
+  - iclr
+  - xai
   - machine learning
   - 数据估值
 heroImage:

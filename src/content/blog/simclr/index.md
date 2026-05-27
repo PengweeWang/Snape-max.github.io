@@ -4,7 +4,7 @@ publishDate: 2025-12-18
 description: 'SimCLR是自监督视觉表征对比学习算法'
 tags:
   - 对比学习
-  - DeepLearning
+  - deep learning
 language: '中文'
 heroImage: { src: './image-20251218101807-yguwcsn.png', color: '#8B5CF6' }
 ---

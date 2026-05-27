@@ -46,6 +46,15 @@ compatibility: opencode
 
 `ai` 字段取值：`'human'`（人类撰写）、`'assisted'`（AI 辅助）、`'ai'`（AI 撰写）。
 
+### tags 字段规范
+
+| 规则 | 说明 |
+| ---- | ---- |
+| 语言 | 可使用中文或英文，同一标签内不混用 |
+| 英文格式 | 全小写，单词间不使用连字符，多个单词用空格分隔 |
+| 示例 | ✅ `machine learning`、`deep learning`、`data science`、`人工智能` |
+| 示例 | ❌ `Machine Learning`、`machine-learning`、`deep-learning` |
+
 ### 图片处理
 
 当文章目录下存在图片文件（如 `.jpg`, `.png`, `.webp` 等）时，自动将其作为 `heroImage`：

@@ -3,7 +3,7 @@ title: ax650交叉编译ax-pipeline
 publishDate: 2024-06-19
 description: 'ax650交叉编译ax-pipeline教程'
 tags:
-  - C++
+  - c++
   - 交叉编译
 language: '中文'
 heroImage: { src: './image-20240619005844205.png', color: '#059669' }

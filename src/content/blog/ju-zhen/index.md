@@ -3,7 +3,7 @@ title: MATLAB中矩阵的使用
 publishDate: 2022-06-01
 description: 'MATLAB中矩阵的使用'
 tags:
-  - MATLAB
+  - matlab
 language: '中文'
 ---
 

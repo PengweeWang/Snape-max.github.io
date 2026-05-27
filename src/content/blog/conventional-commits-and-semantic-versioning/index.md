@@ -3,10 +3,10 @@ title: Conventional Commits 与语义化版本控制
 description: 标准化 Git Commit 信息格式，规范版本号递增规则，让提交记录可读、可自动化生成 CHANGELOG。
 publishDate: '2026-04-29'
 tags:
-  - Git
+  - git
   - 版本控制
-  - Conventional Commits
-  - Semantic Versioning
+  - conventional commits
+  - semantic versioning
   - 软件工程
 heroImage:
   src: './image.png'

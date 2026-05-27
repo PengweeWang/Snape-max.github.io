@@ -3,9 +3,9 @@ title: '如何优雅的安装PyTorch'
 description: '无需安装 CUDA Toolkit，只需 NVIDIA 驱动版本高于 PyTorch 编译所用 CUDA 版本即可享受 GPU 加速。附带镜像源加速安装方法。'
 publishDate: '2026-05-10'
 tags:
-  - 'PyTorch'
-  - 'CUDA'
-  - 'Python'
+  - 'pytorch'
+  - 'cuda'
+  - 'python'
 heroImage:
   src: './runtime.png'
   alt: '如何优雅的安装PyTorch'

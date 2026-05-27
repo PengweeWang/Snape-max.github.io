@@ -3,7 +3,7 @@ title: MATLAB入门
 publishDate: 2022-05-16
 description: 'MATLAB入门基础向量和矩阵操作'
 tags:
-  - MATLAB
+  - matlab
 language: '中文'
 ---
 

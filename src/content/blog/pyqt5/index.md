@@ -3,8 +3,8 @@ title: 使用PyQt5开发应用程序总结
 publishDate: 2023-08-11
 description: 'PyQt5 是一个用于创建图形用户界面的 Python 框架'
 tags:
-  - PyQt5
-  - GUI
+  - pyqt5
+  - gui
 language: '中文'
 ai: ai
 ---

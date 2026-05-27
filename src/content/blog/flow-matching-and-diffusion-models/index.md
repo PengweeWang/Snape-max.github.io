@@ -3,7 +3,7 @@ title: Flow Matching and Diffusion Models
 publishDate: 2025-08-21
 description: 'Flow Matching and Diffusion Models 的介绍与对比'
 tags:
-  - CV
+  - cv
   - 生成模型
 language: 'English'
 heroImage: { src: './8bb17b0d052f439725e08dfee592beb0.png', color: '#7C3AED' }

@@ -3,8 +3,8 @@ title: FastAPI项目开发与部署
 publishDate: 2025-02-16
 description: 'FastAPI 项目开发与部署笔记，包含模块化设计、路由定义和Docker部署'
 tags:
-  - Python
-  - FastAPI
+  - python
+  - fastapi
 language: '中文'
 ai: ai
 ---

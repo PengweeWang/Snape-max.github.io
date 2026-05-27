@@ -3,7 +3,7 @@ title: MATLAB中多项式详解
 publishDate: 2022-06-01
 description: 'MATLAB中多项式详解'
 tags:
-  - MATLAB
+  - matlab
 language: '中文'
 ai: ai
 ---
