@@ -2,6 +2,7 @@
 import config from 'virtual:config'
 import PageLayout from '@/layouts/CommonPage.astro'
 import FriendList from '@/components/links/FriendList.astro'
+import { Button, Collapse, Spoiler, Timeline } from 'astro-pure/user'
 
 const headings = [
   { depth: 2, slug: 'common-links', text: 'Common Links' },
@@ -26,12 +27,6 @@ const hexoFriendLinks = {
       avatar: 'https://avatars.githubusercontent.com/u/95453169?v=4'
     },
     {
-      name: 'Longlongyu',
-      intro: '百废待星',
-      link: 'https://cmarks.cn/',
-      avatar: 'https://avatars.githubusercontent.com/u/40429255?v=4'
-    },
-    {
       name: 'studysalt',
       intro: 'a cup of salt',
       link: 'https://studysalt.o00o.ink/',
@@ -39,12 +34,30 @@ const hexoFriendLinks = {
     }
   ]
 }
+
+const badFriendLinks = {
+    id_name: 'badlink-friends',
+  desc: '失效的链接',
+  link_list:[
+    {
+      name: 'Longlongyu',
+      intro: '百废待星',
+      link: 'https://cmarks.cn/',
+      avatar: 'https://avatars.githubusercontent.com/u/40429255?v=4'
+    },
+  ]
+}
+
 ---
 
 <PageLayout title='Links' {headings}>
   <p>They're sorted randomly.</p>
   <h2 id='common-links'>Common Links</h2>
   <FriendList list={hexoFriendLinks} />
+
+  <Collapse title='Links with Bad Status'>
+    <FriendList list={badFriendLinks} />
+  </Collapse>
 
   <h2 id='apply-links'>Apply Links</h2>
   <p>本站信息（点击复制）The site information (click to copy)：</p>
