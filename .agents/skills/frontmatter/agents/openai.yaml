@@ -1,0 +1,4 @@
+interface:
+  display_name: "文章 Frontmatter 配置"
+  short_description: "配置与校验 Astro 博客文章 frontmatter 字段"
+  default_prompt: "使用 $frontmatter 补全并规范博客文章的 frontmatter 字段。"
