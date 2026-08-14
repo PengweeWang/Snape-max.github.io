@@ -6,6 +6,10 @@ tags:
 - lora
 - deep learning
 - 模型微调
+heroImage:
+  src: ./lora.png
+  alt: LoRA 学习笔记：从 Intrinsic dimensionality 到 QLoRA 与 LoRA+
+  color: '#D0D1D3'
 draft: false
 language: Chinese
 comment: true
